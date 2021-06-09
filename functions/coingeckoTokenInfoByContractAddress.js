@@ -1,4 +1,4 @@
-const { axiosInstance } = require('lib/services/axiosInstance')
+import { axiosInstance } from '../lib/axiosInstance'
 
 exports.handler = async (event, context, callback) => {
   const { address } = event.queryStringParameters
