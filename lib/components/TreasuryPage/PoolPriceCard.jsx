@@ -8,10 +8,6 @@ export const PoolPriceCard = (props) => {
 
   const poolPrice = usePoolPrice()
 
-  // useEffect(() => {
-  //   console.log(poolPrice)
-  // }, [poolPrice])
-
   return (
     <Card className={className}>
       <h6 className='font-light mb-2'>POOL Price</h6>

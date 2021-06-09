@@ -65,8 +65,7 @@ const ReservesList = (props) => {
       }
     }
 
-    // TODO: Ideally this were `ScreenSize.sm` but there's some clipping happening
-    if (screenSize < 630) {
+    if (screenSize < ScreenSize.sm) {
       return [rows.symbol, rows.usd, rows.links]
     }
 
