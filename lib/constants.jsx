@@ -60,16 +60,6 @@ export const QUERY_KEYS = {
 
 export const ETHERSCAN_API_KEY = process.env.NEXT_JS_ETHERSCAN_API_KEY
 
-export const POOLTOGETHER_CURRENT_GOVERNANCE_GRAPH_URIS = {
-  1: process.env.NEXT_JS_GOVERNANCE_SUBGRAPH_URI_MAINNET,
-  4: process.env.NEXT_JS_GOVERNANCE_SUBGRAPH_URI_RINKEBY
-}
-
-export const POOLTOGETHER_SUBGRAPH_URIS = {
-  1: process.env.NEXT_JS_SUBGRAPH_URI_MAINNET,
-  4: process.env.NEXT_JS_SUBGRAPH_URI_RINKEBY
-}
-
 export const PROPOSAL_STATUS = {
   pending: 'pending',
   active: 'active',

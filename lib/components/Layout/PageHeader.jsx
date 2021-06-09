@@ -2,7 +2,7 @@ import React from 'react'
 import { PageHeaderContainer, ButtonLink, ExternalLink } from '@pooltogether/react-components'
 import Link from 'next/link'
 
-const HEADER_LINK_CLASSES = 'mr-4 last:mr-0 text-base sm:text-lg'
+const HEADER_LINK_CLASSES = 'mr-4 last:mr-0 text-sm sm:text-lg'
 
 export const PageHeader = (props) => (
   <PageHeaderContainer Link={Link} as='/' href='/'>

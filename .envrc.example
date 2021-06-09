@@ -3,25 +3,13 @@
 export NEXT_JS_ENV=
 
 export NEXT_JS_FORTMATIC_API_KEY=
-export NEXT_JS_FORTMATIC_PRODUCTION_API_KEY=
 
 export NEXT_JS_PORTIS_API_KEY=
-
-export NEXT_JS_GOVERNANCE_SUBGRAPH_URI_MAINNET=https://api.thegraph.com/subgraphs/name/pooltogether/pooltogether-governance
-export NEXT_JS_GOVERNANCE_SUBGRAPH_URI_RINKEBY=https://api.thegraph.com/subgraphs/name/pooltogether/pooltogether-rinkeby-governance
-
-export NEXT_JS_SUBGRAPH_URI_MAINNET=https://api.thegraph.com/subgraphs/name/pooltogether/pooltogether-v3_1_0
-export NEXT_JS_SUBGRAPH_URI_RINKEBY=https://api.thegraph.com/subgraphs/name/pooltogether/rinkeby-v3_1_0
 
 export NEXT_JS_DEFAULT_ETHEREUM_NETWORK_NAME=
 
 export NEXT_JS_INFURA_ID=
 export NEXT_JS_DOMAIN_NAME=
-
-export NEXT_JS_ETHERSCAN_API_KEY=
-
-export MAGIC_SECRET_KEY=
-export NEXT_JS_MAGIC_PUB_KEY=
 
 export NEXT_JS_LOCIZE_DEV_API_KEY=
 export NEXT_JS_LOCIZE_PROJECT_ID=
