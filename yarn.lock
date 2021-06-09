@@ -4120,10 +4120,10 @@
   resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-rng-contracts/-/pooltogether-rng-contracts-1.0.0.tgz#191d155dc960559cce06b7ec3b0f9ed2caed0f46"
   integrity sha512-jQub/+qPLQwTFtbBCvvyIEqxJDEBEV/hgLKnuocBg2/GySWtHLz67WCy17bNn1hZw8nWIt8Ih8h+7iT2UJhtmQ==
 
-"@pooltogether/react-components@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@pooltogether/react-components/-/react-components-0.0.7.tgz#9be370186a45de934d76a2bfb41970290cf7db31"
-  integrity sha512-grmfYoo6uirJexs1sM7YKf+dfE/7LIzop9uvOUTIDamjAMp8WIW/6B/t9aiCmQDk+pArTffxIhYGf5QdHSSlIA==
+"@pooltogether/react-components@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@pooltogether/react-components/-/react-components-0.0.8.tgz#fce8e3d46d3a8fce655feac8faf1a675cd6b23f1"
+  integrity sha512-i/+5hcNpfgt3jCz2eTVgjLNhlwDzgnrwm9KaXQh/CiL6Fu0iCdLA7zINqKtzlypjm/iYxk0/7RMLi5Ibpzm73A==
   dependencies:
     "3box" "^1.19.1"
     "@reach/dialog" "^0.15.0"
