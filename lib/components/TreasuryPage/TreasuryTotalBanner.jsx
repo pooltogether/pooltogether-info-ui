@@ -10,8 +10,8 @@ export const TreasuryTotalBanner = (props) => {
 
   return (
     <Banner className={className}>
-      <h6 className='font-light mb-2'>Treasury Balance</h6>
-      <h1>
+      <h6 className='font-light mb-2 text-white'>Treasury Balance</h6>
+      <h1 className='text-white'>
         $
         {isFetched ? (
           <Amount>{numberWithCommas(data.totalValueUsd, { precision: 2 })}</Amount>
