@@ -15,7 +15,12 @@ import '@reach/tooltip/styles.css'
 
 import 'assets/styles/index.css'
 import '@pooltogether/react-components/dist/index.css'
-import { useInitializeOnboard } from '@pooltogether/hooks'
+import {
+  useInitializeOnboard,
+  useInitInfuraId,
+  useInitReducedMotion,
+  useInitCookieOptions
+} from '@pooltogether/hooks'
 import {
   ToastContainer,
   LoadingScreen,
@@ -103,7 +108,7 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <Provider>
       <QueryClientProvider client={queryClient}>
-        <InitializeOnboard>
+        <InitPoolTogetherHooks>
           <ToastContainer className='pool-toast' position='top-center' autoClose={7000} />
 
           <AllContextProviders>
@@ -118,15 +123,23 @@ function MyApp({ Component, pageProps, router }) {
               <ReactQueryDevtools />
             </CustomErrorBoundary>
           </AllContextProviders>
-        </InitializeOnboard>
+        </InitPoolTogetherHooks>
       </QueryClientProvider>
     </Provider>
   )
 }
 
-const InitializeOnboard = (props) => {
-  useInitializeOnboard()
-  return props.children
+const InitPoolTogetherHooks = ({ children }) => {
+  useInitInfuraId(process.env.NEXT_JS_INFURA_ID)
+  useInitReducedMotion(Boolean(process.env.NEXT_JS_REDUCE_MOTION))
+  useInitCookieOptions(process.env.NEXT_JS_DOMAIN_NAME)
+  useInitializeOnboard({
+    infuraId: process.env.NEXT_JS_INFURA_ID,
+    fortmaticKey: process.env.NEXT_JS_FORTMATIC_API_KEY,
+    portisKey: process.env.NEXT_JS_PORTIS_API_KEY,
+    defaultNetworkName: process.env.NEXT_JS_DEFAULT_ETHEREUM_NETWORK_NAME
+  })
+  return children
 }
 
 export default MyApp
