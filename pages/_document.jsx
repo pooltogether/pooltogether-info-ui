@@ -12,9 +12,9 @@ class MyDocument extends Document {
   }
 
   render() {
-    const title = 'PoolTogether'
-    const url = `https://vote.pooltogether.com`
-    const description = `Direct the future of the PoolTogether protocol.`
+    const title = 'PoolTogether Protocol Info'
+    const url = `https://info.pooltogether.com`
+    const description = `Analytics for the PoolTogether protocol.`
     const keywords = 'ethereum'
     const twitterHandle = '@PoolTogether_'
 
@@ -58,8 +58,6 @@ class MyDocument extends Document {
           </>
         </Head>
         <body className='bg-body'>
-          <Meta />
-
           <Main />
           <NextScript />
           <script src='/confetti.js'></script>
