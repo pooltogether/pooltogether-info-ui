@@ -1,11 +1,10 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import FeatherIcon from 'feather-icons-react'
 import {
   Amount,
   BasicTable,
   BlockExplorerLink,
   Card,
-  ExternalLink,
   TokenImage
 } from '@pooltogether/react-components'
 import {
@@ -13,8 +12,8 @@ import {
   useGovernanceTokenBalancesFlattened
 } from 'lib/hooks/useGovernanceTokenBalances'
 import { useVestingPoolBalance } from 'lib/hooks/useVestingPoolBalance'
-import { getMaxPrecision, getMinPrecision, numberWithCommas } from '@pooltogether/utilities'
-import { useTable, useBlockLayout, useResizeColumns, useFlexLayout } from 'react-table'
+import { getMinPrecision, numberWithCommas } from '@pooltogether/utilities'
+import { useTable } from 'react-table'
 import { ScreenSize, useScreenSize } from '@pooltogether/hooks'
 import { CONTRACT_ADDRESSES } from 'lib/constants'
 import { LoadingRows } from 'lib/components/LoadingRows'
@@ -26,7 +25,7 @@ export const TokenBalancesCard = (props) => {
 
   return (
     <Card className={className}>
-      <h6 className='font-light mb-2'>Tokens</h6>
+      <h6 className='font-light mb-2'>Token Holdings</h6>
       <h4>
         $
         {isFetched ? (
