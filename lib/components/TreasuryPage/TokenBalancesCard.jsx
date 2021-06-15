@@ -5,7 +5,7 @@ import {
   BasicTable,
   BlockExplorerLink,
   Card,
-  TokenImage
+  TokenIcon
 } from '@pooltogether/react-components'
 import {
   useGovernanceTokenBalancesTotal,
@@ -26,7 +26,7 @@ export const TokenBalancesCard = (props) => {
   return (
     <Card className={className}>
       <h6 className='font-light mb-2'>Token Holdings</h6>
-      <h4>
+      <h4 className='mb-4'>
         $
         {isFetched ? (
           <Amount>{numberWithCommas(data.totalValueUsd, { precision: 2 })}</Amount>
@@ -102,14 +102,14 @@ const TokensList = (props) => {
     )
   }
 
-  return <BasicTable tableInstance={tableInstance} />
+  return <BasicTable tableInstance={tableInstance} noHeader />
 }
 
 const Symbol = (props) => {
   const { symbol, chainId, address, isVesting } = props
   return (
     <span className='flex mb-3'>
-      <TokenImage chainId={chainId} address={address} className='mr-2 sm:mr-4 my-auto' />
+      <TokenIcon chainId={chainId} address={address} className='mr-2 sm:mr-4 my-auto' />
       {isVesting ? (
         <>
           <BlockExplorerLink chainId={chainId} address={CONTRACT_ADDRESSES[chainId].TreasuryVester}>

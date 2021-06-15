@@ -1,5 +1,5 @@
 import { ScreenSize, useScreenSize } from '@pooltogether/hooks'
-import { Amount, BasicTable, Card, TokenImage, ExternalLink } from '@pooltogether/react-components'
+import { Amount, BasicTable, Card, TokenIcon, ExternalLink } from '@pooltogether/react-components'
 import {
   getMinPrecision,
   getNetworkNameAliasByChainId,
@@ -23,7 +23,7 @@ export const ReservesCard = (props) => {
   return (
     <Card className={className}>
       <h6 className='font-light mb-2'>Prize Pool Reserves</h6>
-      <h4>
+      <h4 className='mb-4'>
         $
         {isFetched ? (
           <Amount>{numberWithCommas(data.totalValueUsd, { precision: 2 })}</Amount>
@@ -96,7 +96,7 @@ const ReservesList = (props) => {
       </div>
     )
   }
-  return <BasicTable tableInstance={tableInstance} />
+  return <BasicTable tableInstance={tableInstance} noHeader />
 }
 
 const Symbol = (props) => {
@@ -104,7 +104,7 @@ const Symbol = (props) => {
   const { symbol, address } = token
   return (
     <span className='flex mb-3'>
-      <TokenImage chainId={chainId} address={address} className='mr-2 sm:mr-4 my-auto' />
+      <TokenIcon chainId={chainId} address={address} className='mr-2 sm:mr-4 my-auto' />
       <span className='font-bold'>{symbol}</span>
     </span>
   )
