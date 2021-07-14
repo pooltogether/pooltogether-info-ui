@@ -1,8 +1,7 @@
 {
   "name": "pooltogether-info-ui",
   "version": "1.0.0",
-  "private": true,
-  "author": "PoolTogether Inc.",
+  "author": "PoolTogether",
   "scripts": {
     "reinstall": "rm -rf ./node_modules && yarn",
     "dev": "npm-run-all --parallel start:app start:server",
