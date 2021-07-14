@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react'
+import { useTable } from 'react-table'
 import FeatherIcon from 'feather-icons-react'
 import {
   Amount,
@@ -7,16 +8,16 @@ import {
   Card,
   TokenIcon
 } from '@pooltogether/react-components'
+import { ScreenSize, useScreenSize } from '@pooltogether/hooks'
+import { getMinPrecision, numberWithCommas } from '@pooltogether/utilities'
+
+import { CONTRACT_ADDRESSES } from 'lib/constants'
+import { LoadingRows } from 'lib/components/LoadingRows'
 import {
   useGovernanceTokenBalancesTotal,
   useGovernanceTokenBalancesFlattened
 } from 'lib/hooks/useGovernanceTokenBalances'
 import { useVestingPoolBalance } from 'lib/hooks/useVestingPoolBalance'
-import { getMinPrecision, numberWithCommas } from '@pooltogether/utilities'
-import { useTable } from 'react-table'
-import { ScreenSize, useScreenSize } from '@pooltogether/hooks'
-import { CONTRACT_ADDRESSES } from 'lib/constants'
-import { LoadingRows } from 'lib/components/LoadingRows'
 
 export const TokenBalancesCard = (props) => {
   const { className } = props
@@ -25,8 +26,8 @@ export const TokenBalancesCard = (props) => {
 
   return (
     <Card className={className}>
-      <h6 className='font-light mb-2'>Token Holdings</h6>
-      <h4 className='mb-4'>
+      <h6 className='font-inter text-accent-2 text-xs uppercase mt-2 mb-4'>Token Holdings</h6>
+      <h4 className='mb-4 sm:mb-8'>
         $
         {isFetched ? (
           <Amount>{numberWithCommas(data.totalValueUsd, { precision: 2 })}</Amount>
@@ -35,12 +36,23 @@ export const TokenBalancesCard = (props) => {
         )}
       </h4>
       <TokensList />
+
+      <h6 className='font-inter text-accent-2 uppercase mt-2'>
+        <BlockExplorerLink
+          chainId={1}
+          address={CONTRACT_ADDRESSES[1].GovernanceTimelock}
+          className='opacity-60 hover:opacity-100 text-xs mt-4'
+        >
+          Governance Timelock
+        </BlockExplorerLink>
+      </h6>
     </Card>
   )
 }
 
-const TokensList = (props) => {
+const TokensList = () => {
   const { data: tokenBalances, isFetched } = useGovernanceTokenBalancesFlattened()
+  // console.log(tokenBalances)
 
   const { data: vestingPoolBalance, isFetched: isVestingPoolBalanceFetched } =
     useVestingPoolBalance()
@@ -108,7 +120,7 @@ const TokensList = (props) => {
 const Symbol = (props) => {
   const { symbol, chainId, address, isVesting } = props
   return (
-    <span className='flex mb-3'>
+    <span className='flex my-2'>
       <TokenIcon chainId={chainId} address={address} className='mr-2 sm:mr-4 my-auto' />
       {isVesting ? (
         <>
@@ -119,7 +131,9 @@ const Symbol = (props) => {
           </BlockExplorerLink>
         </>
       ) : (
-        <span className='font-bold'>{symbol}</span>
+        <BlockExplorerLink chainId={chainId} address={address}>
+          <span className='font-bold'>{symbol}</span>
+        </BlockExplorerLink>
       )}
     </span>
   )
@@ -128,7 +142,7 @@ const Symbol = (props) => {
 const TokenAmount = (props) => {
   const { symbol, amount } = props
   return (
-    <span className='flex mb-3'>
+    <span className='flex my-2'>
       <Amount>{numberWithCommas(amount, { precision: getMinPrecision(amount) })}</Amount>
       <span className='ml-1 opacity-40'>{symbol}</span>
     </span>
@@ -138,7 +152,7 @@ const TokenAmount = (props) => {
 const UsdAmount = (props) => {
   const { totalValueUsd } = props
   return (
-    <span className='flex mb-3 justify-end'>
+    <span className='flex justify-end'>
       $<Amount>{numberWithCommas(totalValueUsd, { precision: 2 })}</Amount>
     </span>
   )

@@ -1,7 +1,8 @@
+import React from 'react'
 import { Card, Amount, ExternalLink } from '@pooltogether/react-components'
-import { usePoolPrice } from 'lib/hooks/usePoolPrice'
 import { numberWithCommas } from '@pooltogether/utilities'
-import React, { useEffect } from 'react'
+
+import { usePoolPrice } from 'lib/hooks/usePoolPrice'
 
 export const PoolPriceCard = (props) => {
   const { className } = props
@@ -10,7 +11,7 @@ export const PoolPriceCard = (props) => {
 
   return (
     <Card className={className}>
-      <h6 className='font-light mb-2'>POOL Price</h6>
+      <h6 className='font-inter text-accent-2 text-xs uppercase mb-4'>POOL Price</h6>
       <div className='flex flex-row justify-between'>
         <h4>
           ${poolPrice ? <Amount>{numberWithCommas(poolPrice.usd, { precision: 2 })}</Amount> : '--'}

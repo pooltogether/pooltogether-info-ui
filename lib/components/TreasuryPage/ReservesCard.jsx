@@ -1,19 +1,26 @@
+import React, { useMemo } from 'react'
+import { useTable } from 'react-table'
 import { ScreenSize, useScreenSize } from '@pooltogether/hooks'
-import { Amount, BasicTable, Card, TokenIcon, ExternalLink } from '@pooltogether/react-components'
+import {
+  Amount,
+  BasicTable,
+  Card,
+  TokenIcon,
+  ExternalLink,
+  BlockExplorerLink
+} from '@pooltogether/react-components'
 import {
   getMinPrecision,
   getNetworkNameAliasByChainId,
   getPrizePoolSymbol,
   numberWithCommas
 } from '@pooltogether/utilities'
+
 import { LoadingRows } from 'lib/components/LoadingRows'
 import {
-  usePrizePoolReserves,
   usePrizePoolReservesFlattened,
   usePrizePoolReservesTotal
 } from 'lib/hooks/usePrizePoolReserves'
-import React, { useEffect, useMemo } from 'react'
-import { useFlexLayout, useTable } from 'react-table'
 
 export const ReservesCard = (props) => {
   const { className } = props
@@ -22,8 +29,8 @@ export const ReservesCard = (props) => {
 
   return (
     <Card className={className}>
-      <h6 className='font-light mb-2'>Prize Pool Reserves</h6>
-      <h4 className='mb-4'>
+      <h6 className='font-inter text-accent-2 text-xs uppercase mt-2 mb-4'>Prize Pool Reserves</h6>
+      <h4 className='mb-4 sm:mb-8'>
         $
         {isFetched ? (
           <Amount>{numberWithCommas(data.totalValueUsd, { precision: 2 })}</Amount>
@@ -103,9 +110,11 @@ const Symbol = (props) => {
   const { chainId, token } = props
   const { symbol, address } = token
   return (
-    <span className='flex mb-3'>
+    <span className='flex my-2'>
       <TokenIcon chainId={chainId} address={address} className='mr-2 sm:mr-4 my-auto' />
-      <span className='font-bold'>{symbol}</span>
+      <BlockExplorerLink chainId={chainId} address={address}>
+        <span className='font-bold'>{symbol}</span>
+      </BlockExplorerLink>
     </span>
   )
 }
@@ -114,7 +123,7 @@ const TokenAmount = (props) => {
   const { token } = props
   const { symbol, amount } = token
   return (
-    <span className='flex mb-3'>
+    <span className='flex my-2'>
       <Amount>{numberWithCommas(amount, { precision: getMinPrecision(amount) })}</Amount>
       <span className='ml-1 opacity-40'>{symbol}</span>
     </span>
@@ -125,7 +134,7 @@ const UsdAmount = (props) => {
   const { token } = props
   const { totalValueUsd } = token
   return (
-    <span className='flex mb-3'>
+    <span className='flex my-2'>
       $<Amount>{numberWithCommas(totalValueUsd, { precision: 2 })}</Amount>
     </span>
   )
@@ -138,7 +147,7 @@ const Links = (props) => {
 
   const path = symbol || getPrizePoolSymbol(ticker, address)
   return (
-    <span className='flex mb-3 justify-end'>
+    <span className='flex justify-end'>
       <ExternalLink
         href={`https://app.pooltogether.com/pools/${getNetworkNameAliasByChainId(
           Number(chainId)

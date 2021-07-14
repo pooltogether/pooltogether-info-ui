@@ -1,19 +1,19 @@
 import React from 'react'
-import { PageHeaderContainer, ButtonLink, ExternalLink } from '@pooltogether/react-components'
 import Link from 'next/link'
+import { PageHeaderContainer } from '@pooltogether/react-components'
 
-const HEADER_LINK_CLASSES = 'mr-4 last:mr-0 text-sm sm:text-lg'
+const HEADER_LINK_CLASSES = 'mr-4 last:mr-0 text-sm sm:text-lg hover:text-green'
 
 export const PageHeader = (props) => (
   <PageHeaderContainer Link={Link} as='/' href='/'>
-    <ExternalLink href='https://app.pooltogether.com/' className={HEADER_LINK_CLASSES}>
+    <a href='https://app.pooltogether.com/' className={HEADER_LINK_CLASSES}>
       Pools
-    </ExternalLink>
-    <ExternalLink href='https://app.pooltogether.com/account' className={HEADER_LINK_CLASSES}>
+    </a>
+    <a href='https://app.pooltogether.com/account' className={HEADER_LINK_CLASSES}>
       Account
-    </ExternalLink>
-    <ExternalLink href='https://vote.pooltogether.com/' className={HEADER_LINK_CLASSES}>
+    </a>
+    <a href='https://vote.pooltogether.com/' className={HEADER_LINK_CLASSES}>
       Vote
-    </ExternalLink>
+    </a>
   </PageHeaderContainer>
 )

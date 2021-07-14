@@ -3,7 +3,7 @@ import * as Fathom from 'fathom-client'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import { ethers } from 'ethers'
-import { ReactQueryDevtools } from 'react-query-devtools'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Provider } from 'jotai'
 
