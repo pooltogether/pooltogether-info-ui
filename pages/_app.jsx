@@ -14,6 +14,7 @@ import '@reach/menu-button/styles.css'
 import '@reach/tooltip/styles.css'
 
 import 'assets/styles/index.css'
+import 'assets/styles/info.css'
 import '@pooltogether/react-components/dist/index.css'
 import {
   useInitializeOnboard,

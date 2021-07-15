@@ -152,7 +152,6 @@ const Links = (props) => {
         href={`https://app.pooltogether.com/pools/${getNetworkNameAliasByChainId(
           Number(chainId)
         )}/${path}`}
-        className='mr-2'
       >
         Pool
       </ExternalLink>
