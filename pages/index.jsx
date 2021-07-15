@@ -1,5 +1,6 @@
-import TreasuryPage from 'lib/components/TreasuryPage'
 import React from 'react'
+
+import { TreasuryPage } from 'lib/components/TreasuryPage'
 
 const Page = (props) => <TreasuryPage />
 

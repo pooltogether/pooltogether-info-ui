@@ -1,6 +1,6 @@
-# PoolTogether Skeleton UI
+# PoolTogether Analytics UI
 
-A simple React app to standardize core apps across the PoolTogether ecosystem.
+Provides insight into the health of the PoolTogether protocol, such as statistics on treasury reserves and token faucets.
 
 # Setup
 
