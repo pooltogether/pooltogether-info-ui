@@ -15,6 +15,8 @@ export const MAINNET_POLLING_INTERVAL = process.env.NEXT_JS_DOMAIN_NAME ? 22 * 1
 
 export const MAX_SAFE_INTEGER = 9007199254740991
 
+export const ETHEREUM_NETWORKS = [1, 3, 4, 5, 42]
+
 // cookie names
 export const TRANSACTIONS_KEY = 'txs'
 export const SHOW_MANAGE_LINKS = 'showManageLinks'

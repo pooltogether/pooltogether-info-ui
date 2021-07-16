@@ -10,6 +10,7 @@ import {
 import { NETWORK, numberWithCommas } from '@pooltogether/utilities'
 import { ScreenSize, useGovernanceChainId, useScreenSize } from '@pooltogether/hooks'
 
+import { NetworkBadge } from 'lib/components/NetworkBadge'
 import { LoadingRows } from 'lib/components/LoadingRows'
 import { useTokenFaucets, useTokenFaucetsFlattened } from 'lib/hooks/useTokenFaucets'
 
@@ -20,9 +21,15 @@ export const TokenFaucetsCard = (props) => {
 
   return (
     <Card className={className}>
-      <h6 className='font-inter text-accent-2 text-xs uppercase mt-2 mb-4'>Token Faucets</h6>
+      <h6 className='font-inter text-accent-2 text-xs uppercase mt-2 mb-8'>Token Faucets</h6>
+
       <TokensList chainId={governanceChainId} />
-      {isMainnet && <TokensList chainId={NETWORK.matic} />}
+
+      {isMainnet && (
+        <div className='mt-10'>
+          <TokensList chainId={NETWORK.matic} />
+        </div>
+      )}
     </Card>
   )
 }
@@ -38,12 +45,14 @@ const TokensList = (props) => {
 
   const columns = useMemo(() => {
     const rows = {
-      symbol: {
-        accessor: 'symbol',
+      dripToken: {
+        Header: 'Drip token',
+        accessor: 'dripToken',
         className: '',
         Cell: (row) => <DripToken {...row.row.original} row={row} />
       },
       totalUnclaimed: {
+        Header: 'Total unclaimed',
         accessor: 'totalUnclaimed',
         className: '',
         Cell: (row) => <TotalUnclaimed {...row.row.original} row={row} />
@@ -56,10 +65,10 @@ const TokensList = (props) => {
     }
 
     if (screenSize < ScreenSize.sm) {
-      return [rows.symbol]
+      return [rows.dripToken]
     }
 
-    return [rows.symbol, rows.totalUnclaimed]
+    return [rows.dripToken, rows.totalUnclaimed]
   }, [screenSize])
 
   const data = useMemo(() => {
@@ -87,7 +96,17 @@ const TokensList = (props) => {
     )
   }
 
-  return <BasicTable tableInstance={tableInstance} noHeader />
+  return (
+    <>
+      <NetworkBadge
+        textClassName='text-xs sm:text-sm'
+        sizeClassName='w-4 sm:w-5 h-4 sm:h-5'
+        className='mb-4 sm:mb-6'
+        chainId={chainId}
+      />
+      <BasicTable tableInstance={tableInstance} />
+    </>
+  )
 }
 
 const DripToken = (props) => {
@@ -103,7 +122,9 @@ const DripToken = (props) => {
 }
 
 const TotalUnclaimed = (props) => {
-  const { symbol, totalUnclaimed } = props
+  const { dripToken, totalUnclaimed } = props
+  const { symbol } = dripToken
+
   return (
     <span className='flex my-2'>
       <Amount>{numberWithCommas(totalUnclaimed)}</Amount>
