@@ -51,6 +51,18 @@ const TokensList = (props) => {
         className: '',
         Cell: (row) => <DripToken {...row.row.original} row={row} />
       },
+      measureToken: {
+        Header: 'Measure token',
+        accessor: 'meeasureToken',
+        className: '',
+        Cell: (row) => <MeasureToken {...row.row.original} row={row} />
+      },
+      dripRate: {
+        Header: 'Drip rate/s',
+        accessor: 'dripRatePerSecond',
+        className: '',
+        Cell: (row) => <DripRate {...row.row.original} row={row} />
+      },
       totalUnclaimed: {
         Header: 'Total unclaimed',
         accessor: 'totalUnclaimed',
@@ -65,10 +77,10 @@ const TokensList = (props) => {
     }
 
     if (screenSize < ScreenSize.sm) {
-      return [rows.dripToken]
+      return [rows.dripToken, rows.measureToken, rows.dripRate]
     }
 
-    return [rows.dripToken, rows.totalUnclaimed]
+    return [rows.dripToken, rows.measureToken, rows.dripRate, rows.totalUnclaimed]
   }, [screenSize])
 
   const data = useMemo(() => {
@@ -121,6 +133,18 @@ const DripToken = (props) => {
   )
 }
 
+const MeasureToken = (props) => {
+  const { chainId, measureToken } = props
+  const { address, symbol } = measureToken
+
+  return (
+    <span className='flex my-2'>
+      <TokenIcon chainId={chainId} address={address} className='mr-2 sm:mr-4 my-auto' />
+      <span className='font-bold'>{symbol}</span>
+    </span>
+  )
+}
+
 const TotalUnclaimed = (props) => {
   const { dripToken, totalUnclaimed } = props
   const { symbol } = dripToken
@@ -129,6 +153,16 @@ const TotalUnclaimed = (props) => {
     <span className='flex my-2'>
       <Amount>{numberWithCommas(totalUnclaimed)}</Amount>
       <span className='ml-1 opacity-40'>{symbol}</span>
+    </span>
+  )
+}
+
+const DripRate = (props) => {
+  const { dripRatePerSecond } = props
+
+  return (
+    <span className='flex my-2'>
+      <Amount>{numberWithCommas(dripRatePerSecond)}</Amount>
     </span>
   )
 }
