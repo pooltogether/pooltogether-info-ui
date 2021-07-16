@@ -52,7 +52,6 @@ export const TokenBalancesCard = (props) => {
 
 const TokensList = () => {
   const { data: tokenBalances, isFetched } = useGovernanceTokenBalancesFlattened()
-  // console.log(tokenBalances)
 
   const { data: vestingPoolBalance, isFetched: isVestingPoolBalanceFetched } =
     useVestingPoolBalance()

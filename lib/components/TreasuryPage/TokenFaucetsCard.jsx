@@ -58,8 +58,8 @@ const TokensList = (props) => {
         Cell: (row) => <MeasureToken {...row.row.original} row={row} />
       },
       dripRate: {
-        Header: 'Drip rate/s',
-        accessor: 'dripRatePerSecond',
+        Header: 'Drip rate/day',
+        accessor: 'dripRatePerDay',
         className: '',
         Cell: (row) => <DripRate {...row.row.original} row={row} />
       },
@@ -158,11 +158,11 @@ const TotalUnclaimed = (props) => {
 }
 
 const DripRate = (props) => {
-  const { dripRatePerSecond } = props
+  const { dripRatePerDay } = props
 
   return (
     <span className='flex my-2'>
-      <Amount>{numberWithCommas(dripRatePerSecond)}</Amount>
+      <Amount>{numberWithCommas(Math.round(dripRatePerDay))}</Amount>
     </span>
   )
 }
