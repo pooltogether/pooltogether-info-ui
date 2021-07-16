@@ -9,10 +9,10 @@ th {
 }
 
 th {
-  @apply font-inter uppercase pb-2 opacity-60 text-accent-1 text-xxs;
+  @apply font-inter uppercase pb-2 opacity-60 text-accent-1;
 }
 
-tr:hover td {
+tr:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
 

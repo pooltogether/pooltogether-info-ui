@@ -58,16 +58,28 @@ const TokensList = (props) => {
         Cell: (row) => <MeasureToken {...row.row.original} row={row} />
       },
       dripRate: {
-        Header: 'Drip rate/day',
+        Header: 'Rate/day',
         accessor: 'dripRatePerDay',
         className: '',
         Cell: (row) => <DripRate {...row.row.original} row={row} />
       },
       totalUnclaimed: {
-        Header: 'Total unclaimed',
+        Header: 'Unclaimed',
         accessor: 'totalUnclaimed',
         className: '',
         Cell: (row) => <TotalUnclaimed {...row.row.original} row={row} />
+      },
+      remainingBalance: {
+        Header: 'Remaining Balance',
+        accessor: 'remainingDripTokenBalance',
+        className: '',
+        Cell: (row) => <RemainingBalance {...row.row.original} row={row} />
+      },
+      remainingDays: {
+        Header: 'Days remaining',
+        accessor: 'remainingDays',
+        className: '',
+        Cell: (row) => <RemainingDays {...row.row.original} row={row} />
       }
       // usd: {
       //   accessor: 'totalValueUsd',
@@ -77,10 +89,17 @@ const TokensList = (props) => {
     }
 
     if (screenSize < ScreenSize.sm) {
-      return [rows.dripToken, rows.measureToken, rows.dripRate]
+      return [rows.dripToken, rows.measureToken, rows.remainingBalance, rows.remainingDays]
     }
 
-    return [rows.dripToken, rows.measureToken, rows.dripRate, rows.totalUnclaimed]
+    return [
+      rows.dripToken,
+      rows.measureToken,
+      rows.dripRate,
+      rows.totalUnclaimed,
+      rows.remainingBalance,
+      rows.remainingDays
+    ]
   }, [screenSize])
 
   const data = useMemo(() => {
@@ -116,7 +135,11 @@ const TokensList = (props) => {
         className='mb-4 sm:mb-6'
         chainId={chainId}
       />
-      <BasicTable tableInstance={tableInstance} />
+      <BasicTable
+        headerClassName='text-xxxs'
+        rowClassName='text-xs'
+        tableInstance={tableInstance}
+      />
     </>
   )
 }
@@ -163,6 +186,28 @@ const DripRate = (props) => {
   return (
     <span className='flex my-2'>
       <Amount>{numberWithCommas(Math.round(dripRatePerDay))}</Amount>
+    </span>
+  )
+}
+
+const RemainingBalance = (props) => {
+  const { remainingDripTokenBalance, dripToken } = props
+  const { symbol } = dripToken
+
+  return (
+    <span className='flex my-2'>
+      <Amount>{numberWithCommas(Math.round(remainingDripTokenBalance))}</Amount>
+      <span className='ml-1 opacity-40'>{symbol}</span>
+    </span>
+  )
+}
+
+const RemainingDays = (props) => {
+  const { remainingDays } = props
+
+  return (
+    <span className='flex my-2'>
+      <Amount>{numberWithCommas(remainingDays)}</Amount>
     </span>
   )
 }
