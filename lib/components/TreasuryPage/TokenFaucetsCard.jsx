@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
-import FeatherIcon from 'feather-icons-react'
 import {
   Amount,
   BasicTable,
@@ -8,106 +7,93 @@ import {
   Card,
   TokenIcon
 } from '@pooltogether/react-components'
-import { getMinPrecision, numberWithCommas } from '@pooltogether/utilities'
-import { ScreenSize, useScreenSize } from '@pooltogether/hooks'
+import { NETWORK, numberWithCommas } from '@pooltogether/utilities'
+import { ScreenSize, useGovernanceChainId, useScreenSize } from '@pooltogether/hooks'
 
-import { CONTRACT_ADDRESSES } from 'lib/constants'
 import { LoadingRows } from 'lib/components/LoadingRows'
-import {
-  // useGovernanceTokenBalancesTotal,
-  useTokenFaucets,
-  useTokenFaucetsFlattened
-} from 'lib/hooks/useTokenFaucets'
+import { useTokenFaucets, useTokenFaucetsFlattened } from 'lib/hooks/useTokenFaucets'
 
 export const TokenFaucetsCard = (props) => {
   const { className } = props
-  // const chainIds = useChainIds()
-  // const prizePoolContracts = usePrizePoolContracts(chainIds)
-  // const { data, isFetched } = useTokenFaucets()
+  const governanceChainId = useGovernanceChainId()
+  const isMainnet = governanceChainId === NETWORK.mainnet
 
   return (
     <Card className={className}>
       <h6 className='font-inter text-accent-2 text-xs uppercase mt-2 mb-4'>Token Faucets</h6>
-      {/* <h4 className='mb-4 sm:mb-8'>
-        $
-        {isFetched ? (
-          <Amount>{numberWithCommas(data.totalValueUsd, { precision: 2 })}</Amount>
-        ) : (
-          '--'
-        )}
-      </h4> */}
-      <TokensList />
+      <TokensList chainId={governanceChainId} />
+      {isMainnet && <TokensList chainId={NETWORK.matic} />}
     </Card>
   )
 }
 
 const TokensList = (props) => {
-  const { data: tokenFaucets, isFetched } = useTokenFaucets()
+  const { chainId } = props
+
+  const { data: tokenFaucets, isFetched } = useTokenFaucets(chainId)
   // const { data: tokenFaucets, isFetched } = useTokenFaucetsFlattened()
-  console.log(tokenFaucets)
+  const tokenFaucetsFlattened = tokenFaucets?.[chainId]
 
-  return null
-  // const { data: vestingPoolBalance, isFetched: isVestingPoolBalanceFetched } =
-  //   useVestingPoolBalance()
+  const screenSize = useScreenSize()
 
-  // const screenSize = useScreenSize()
+  const columns = useMemo(() => {
+    const rows = {
+      symbol: {
+        accessor: 'symbol',
+        className: '',
+        Cell: (row) => <DripToken {...row.row.original} row={row} />
+      },
+      totalUnclaimed: {
+        accessor: 'totalUnclaimed',
+        className: '',
+        Cell: (row) => <TotalUnclaimed {...row.row.original} row={row} />
+      }
+      // usd: {
+      //   accessor: 'totalValueUsd',
+      //   className: '',
+      //   Cell: (row) => <UsdAmount {...row.row.original} row={row} />
+      // }
+    }
 
-  // const columns = useMemo(() => {
-  //   const rows = {
-  //     symbol: {
-  //       accessor: 'symbol',
-  //       className: '',
-  //       Cell: (row) => <Symbol {...row.row.original} row={row} />
-  //     },
-  //     amount: {
-  //       accessor: 'amount',
-  //       className: '',
-  //       Cell: (row) => <TokenAmount {...row.row.original} row={row} />
-  //     },
-  //     usd: {
-  //       accessor: 'totalValueUsd',
-  //       className: '',
-  //       Cell: (row) => <UsdAmount {...row.row.original} row={row} />
-  //     }
-  //   }
+    if (screenSize < ScreenSize.sm) {
+      return [rows.symbol]
+    }
 
-  //   if (screenSize < ScreenSize.sm) {
-  //     return [rows.symbol, rows.usd]
-  //   }
+    return [rows.symbol, rows.totalUnclaimed]
+  }, [screenSize])
 
-  //   return [rows.symbol, rows.amount, rows.usd]
-  // }, [screenSize])
+  const data = useMemo(() => {
+    let data = []
 
-  // const data = useMemo(() => {
-  //   let data = []
+    if (isFetched) {
+      data = [...data, ...tokenFaucetsFlattened]
+    }
 
-  //   if (isFetched) {
-  //     data = [...data, ...tokenBalances]
-  //   }
+    // data = data.filter((balance) => !balance.amountUnformatted.isZero())
 
-  //   data = data.filter((balance) => !balance.amountUnformatted.isZero())
+    return data
+  }, [tokenFaucetsFlattened, isFetched])
 
-  //   return data
-  // }, [tokenBalances, isFetched])
+  const tableInstance = useTable({
+    columns,
+    data
+  })
 
-  // const tableInstance = useTable({
-  //   columns,
-  //   data
-  // })
+  if (!isFetched) {
+    return (
+      <div>
+        <LoadingRows className='mt-6' />
+      </div>
+    )
+  }
 
-  // if (!isFetched) {
-  //   return (
-  //     <div>
-  //       <LoadingRows className='mt-6' />
-  //     </div>
-  //   )
-  // }
-
-  // return <BasicTable tableInstance={tableInstance} noHeader />
+  return <BasicTable tableInstance={tableInstance} noHeader />
 }
 
-const Symbol = (props) => {
-  const { symbol, chainId, address } = props
+const DripToken = (props) => {
+  const { chainId, dripToken } = props
+  const { address, symbol } = dripToken
+
   return (
     <span className='flex my-2'>
       <TokenIcon chainId={chainId} address={address} className='mr-2 sm:mr-4 my-auto' />
@@ -116,11 +102,11 @@ const Symbol = (props) => {
   )
 }
 
-const TokenAmount = (props) => {
-  const { symbol, amount } = props
+const TotalUnclaimed = (props) => {
+  const { symbol, totalUnclaimed } = props
   return (
     <span className='flex my-2'>
-      <Amount>{numberWithCommas(amount, { precision: getMinPrecision(amount) })}</Amount>
+      <Amount>{numberWithCommas(totalUnclaimed)}</Amount>
       <span className='ml-1 opacity-40'>{symbol}</span>
     </span>
   )

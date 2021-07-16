@@ -53,7 +53,7 @@ export const CONTRACT_ADDRESSES = {
 }
 
 export const QUERY_KEYS = {
-  getTokenFaucetsForAllChains: 'getTokenFaucetsForAllChains',
+  getTokenFaucets: 'getTokenFaucets',
   getPrizePoolReserves: 'getPrizePoolReserves',
   getTokenBalances: 'getTokenBalances',
   getTokenPrices: 'getTokenPrices'
