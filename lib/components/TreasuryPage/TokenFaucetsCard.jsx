@@ -89,12 +89,12 @@ const TokensList = (props) => {
     }
 
     if (screenSize < ScreenSize.sm) {
-      return [rows.dripToken, rows.measureToken, rows.remainingBalance, rows.remainingDays]
+      return [rows.measureToken, rows.dripToken, rows.remainingBalance, rows.remainingDays]
     }
 
     return [
-      rows.dripToken,
       rows.measureToken,
+      rows.dripToken,
       rows.dripRate,
       rows.totalUnclaimed,
       rows.remainingBalance,
