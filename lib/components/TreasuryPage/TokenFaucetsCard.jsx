@@ -1,12 +1,7 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
-import {
-  Amount,
-  BasicTable,
-  BlockExplorerLink,
-  Card,
-  TokenIcon
-} from '@pooltogether/react-components'
+
+import { Amount, BasicTable, Card, TokenIcon } from '@pooltogether/react-components'
 import { NETWORK, numberWithCommas } from '@pooltogether/utilities'
 import { ScreenSize, useGovernanceChainId, useScreenSize } from '@pooltogether/hooks'
 

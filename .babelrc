@@ -7,14 +7,13 @@
     },
     "development": {
       "presets": [
-        "next/babel"
+        "next/babel",
       ]
     },
     "test": {
       "plugins": [
         "@babel/plugin-transform-runtime",
         "@babel/plugin-transform-react-jsx",
-        "emotion"
       ],
       "presets": [
         [
