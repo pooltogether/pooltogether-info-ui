@@ -52,7 +52,7 @@ const TokensList = (props) => {
         Cell: (row) => <DripToken {...row.row.original} row={row} />
       },
       measureToken: {
-        Header: 'Measure token',
+        Header: 'Deposit token',
         accessor: 'meeasureToken',
         className: '',
         Cell: (row) => <MeasureToken {...row.row.original} row={row} />
@@ -69,27 +69,16 @@ const TokensList = (props) => {
         className: '',
         Cell: (row) => <TotalUnclaimed {...row.row.original} row={row} />
       },
-      remainingBalance: {
-        Header: 'Remaining Balance',
-        accessor: 'remainingDripTokenBalance',
-        className: '',
-        Cell: (row) => <RemainingBalance {...row.row.original} row={row} />
-      },
       remainingDays: {
         Header: 'Days remaining',
         accessor: 'remainingDays',
         className: '',
         Cell: (row) => <RemainingDays {...row.row.original} row={row} />
       }
-      // usd: {
-      //   accessor: 'totalValueUsd',
-      //   className: '',
-      //   Cell: (row) => <UsdAmount {...row.row.original} row={row} />
-      // }
     }
 
     if (screenSize < ScreenSize.sm) {
-      return [rows.measureToken, rows.dripToken, rows.remainingBalance, rows.remainingDays]
+      return [rows.measureToken, rows.dripToken, rows.dripRate, rows.remainingDays]
     }
 
     return [
@@ -97,7 +86,6 @@ const TokensList = (props) => {
       rows.dripToken,
       rows.dripRate,
       rows.totalUnclaimed,
-      rows.remainingBalance,
       rows.remainingDays
     ]
   }, [screenSize])
@@ -190,33 +178,12 @@ const DripRate = (props) => {
   )
 }
 
-const RemainingBalance = (props) => {
-  const { remainingDripTokenBalance, dripToken } = props
-  const { symbol } = dripToken
-
-  return (
-    <span className='flex my-2'>
-      <Amount>{numberWithCommas(Math.round(remainingDripTokenBalance))}</Amount>
-      <span className='ml-1 opacity-40'>{symbol}</span>
-    </span>
-  )
-}
-
 const RemainingDays = (props) => {
   const { remainingDays } = props
 
   return (
     <span className='flex my-2'>
       <Amount>{numberWithCommas(remainingDays)}</Amount>
-    </span>
-  )
-}
-
-const UsdAmount = (props) => {
-  const { totalValueUsd } = props
-  return (
-    <span className='flex my-2 justify-end'>
-      $<Amount>{numberWithCommas(totalValueUsd, { precision: 2 })}</Amount>
     </span>
   )
 }

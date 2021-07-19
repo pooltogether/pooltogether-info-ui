@@ -5,8 +5,8 @@ import classnames from 'classnames'
 
 const navLinkClassName =
   'mx-3 px-2 flex items-center justify-center uppercase font-bold tracking-wider outline-none focus:outline-none active:outline-none hover:bg-default rounded-full border-2 px-10 py-1 trans trans-fast text-xs'
-const inactiveNavLinkClassName = 'border-highlight-2 opacity-80 hover:opacity-100 text-highlight-2'
-const activeNavLinkClassName = 'border-inverse opacity-100'
+const inactiveNavLinkClassName = 'text-accent-1 border-accent-1 opacity-80 hover:opacity-100'
+const activeNavLinkClassName = 'text-highlight-2 border-highlight-2 opacity-100'
 
 export const Nav = (props) => {
   const router = useRouter()
