@@ -5,7 +5,6 @@ import {
   Amount,
   BasicTable,
   Card,
-  TokenIcon,
   ExternalLink,
   BlockExplorerLink
 } from '@pooltogether/react-components'
@@ -17,6 +16,7 @@ import {
 } from '@pooltogether/utilities'
 
 import { LoadingRows } from 'lib/components/LoadingRows'
+import { TokenIcon } from 'lib/components/TokenIcon'
 import {
   usePrizePoolReservesFlattened,
   usePrizePoolReservesTotal
