@@ -7,7 +7,7 @@ import { ScreenSize, useGovernanceChainId, useScreenSize } from '@pooltogether/h
 
 import { NetworkBadge } from 'lib/components/NetworkBadge'
 import { LoadingRows } from 'lib/components/LoadingRows'
-import { useTokenFaucets, useTokenFaucetsFlattened } from 'lib/hooks/useTokenFaucets'
+import { useTokenFaucets } from 'lib/hooks/useTokenFaucets'
 
 export const TokenFaucetsCard = (props) => {
   const { className } = props

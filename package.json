@@ -5,7 +5,7 @@
   "scripts": {
     "reinstall": "rm -rf ./node_modules && yarn",
     "dev": "npm-run-all --parallel start:app start:server",
-    "start:app": "PORT=3000 node --max-old-space-size=32768 server.js",
+    "start:app": "PORT=3000 node --max-old-space-size=8192 server.js",
     "start:server": "netlify-lambda serve functions",
     "postinstall": "netlify-lambda install",
     "build": "next build && next export && yarn postexport",
