@@ -6,7 +6,8 @@ import {
   BasicTable,
   Card,
   ExternalLink,
-  BlockExplorerLink
+  BlockExplorerLink,
+  TokenIcon
 } from '@pooltogether/react-components'
 import {
   getMinPrecision,
@@ -16,7 +17,6 @@ import {
 } from '@pooltogether/utilities'
 
 import { LoadingRows } from 'lib/components/LoadingRows'
-import { TokenIcon } from 'lib/components/TokenIcon'
 import {
   usePrizePoolReservesFlattened,
   usePrizePoolReservesTotal

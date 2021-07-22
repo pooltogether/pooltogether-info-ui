@@ -1,7 +1,13 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 import FeatherIcon from 'feather-icons-react'
-import { Amount, BasicTable, BlockExplorerLink, Card } from '@pooltogether/react-components'
+import {
+  Amount,
+  BasicTable,
+  BlockExplorerLink,
+  Card,
+  TokenIcon
+} from '@pooltogether/react-components'
 import { ScreenSize, useScreenSize } from '@pooltogether/hooks'
 import { getMinPrecision, numberWithCommas } from '@pooltogether/utilities'
 
@@ -11,7 +17,6 @@ import {
   useGovernanceTokenBalancesTotal,
   useGovernanceTokenBalancesFlattened
 } from 'lib/hooks/useGovernanceTokenBalances'
-import { TokenIcon } from 'lib/components/TokenIcon'
 import { useVestingPoolBalance } from 'lib/hooks/useVestingPoolBalance'
 
 export const TokenBalancesCard = (props) => {
