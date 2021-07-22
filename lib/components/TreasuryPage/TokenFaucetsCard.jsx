@@ -1,12 +1,10 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 
-// Fix import/export of images in react-components before using this:
-import { Amount, BasicTable, Card /*, TokenIcon*/ } from '@pooltogether/react-components'
+import { Amount, BasicTable, Card, TokenIcon } from '@pooltogether/react-components'
 import { NETWORK, numberWithCommas } from '@pooltogether/utilities'
 import { ScreenSize, useGovernanceChainId, useScreenSize } from '@pooltogether/hooks'
 
-import { TokenIcon } from 'lib/components/TokenIcon'
 import { NetworkBadge } from 'lib/components/NetworkBadge'
 import { LoadingRows } from 'lib/components/LoadingRows'
 import { useTokenFaucets } from 'lib/hooks/useTokenFaucets'
