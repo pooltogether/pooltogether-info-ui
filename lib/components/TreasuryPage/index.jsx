@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { Meta } from 'lib/components/Meta'
 import { Layout } from 'lib/components/Layout'
 import { Nav } from 'lib/components/Layout/Nav'
 import { PoolPriceCard } from 'lib/components/TreasuryPage/PoolPriceCard'
@@ -9,13 +10,17 @@ import { TreasuryTotalBanner } from 'lib/components/TreasuryPage/TreasuryTotalBa
 
 export const TreasuryPage = (props) => {
   return (
-    <Layout>
-      <Nav />
+    <>
+      <Meta title='Overview' />
 
-      <TreasuryTotalBanner className='mb-4 sm:mb-10 p-6 sm:px-12 leading-none' />
-      <PoolPriceCard className='mb-4 sm:mb-10 leading-none' />
-      <ReservesCard className='mb-4 sm:mb-10 leading-none' />
-      <TokenBalancesCard className='mb-4 sm:mb-10 leading-none' />
-    </Layout>
+      <Layout>
+        <Nav />
+
+        <TreasuryTotalBanner className='mb-4 sm:mb-10 p-6 sm:px-12 leading-none' />
+        <PoolPriceCard className='mb-4 sm:mb-10 leading-none' />
+        <ReservesCard className='mb-4 sm:mb-10 leading-none' />
+        <TokenBalancesCard className='mb-4 sm:mb-10 leading-none' />
+      </Layout>
+    </>
   )
 }

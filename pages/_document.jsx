@@ -12,7 +12,8 @@ class MyDocument extends Document {
   }
 
   render() {
-    const title = 'PoolTogether Protocol Info'
+    const title = `PoolTogether Protocol Analytics`
+
     const url = `https://info.pooltogether.com`
     const description = `Analytics for the PoolTogether protocol.`
     const keywords = 'ethereum'
@@ -24,6 +25,8 @@ class MyDocument extends Document {
         <Head>
           <>
             <link rel='icon' href='/favicon.png' type='image/x-icon' />
+
+            <title>{title}</title>
 
             <meta name='theme-color' content='#1e0b43' />
             <meta name='description' content={description} />
