@@ -3981,10 +3981,10 @@
     walletlink "^2.1.0"
     web3-provider-engine "^16.0.1"
 
-"@pooltogether/current-pool-data@3.5.4":
-  version "3.5.4"
-  resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.5.4.tgz#bd699e81376bf6c97d5634a84561d2656ca082c7"
-  integrity sha512-FGzjxNXcBDc5n55gJal3dxPhzpGDFiT1/SaR1Z9o6XcE6Yk5cA5TwSdWpbY45yZSOp2A0MSt4uSQOumCZRvE2g==
+"@pooltogether/current-pool-data@3.5.12":
+  version "3.5.12"
+  resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.5.12.tgz#f23176e3ea9d318a40e042cbf6027625090939ed"
+  integrity sha512-FJntX6bFlYF4vmcfLy1eb+fHdcaLqGvAM41J7SV9I7Su3M0AjBMsT9wr6aJIkzqWHgVyVcMhgZHaASgiNbXktw==
 
 "@pooltogether/current-pool-data@^3.4.3":
   version "3.4.11"
@@ -4065,10 +4065,10 @@
   resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-rng-contracts/-/pooltogether-rng-contracts-1.0.0.tgz#191d155dc960559cce06b7ec3b0f9ed2caed0f46"
   integrity sha512-jQub/+qPLQwTFtbBCvvyIEqxJDEBEV/hgLKnuocBg2/GySWtHLz67WCy17bNn1hZw8nWIt8Ih8h+7iT2UJhtmQ==
 
-"@pooltogether/react-components@^0.1.16":
-  version "0.1.16"
-  resolved "https://registry.yarnpkg.com/@pooltogether/react-components/-/react-components-0.1.16.tgz#23d63728f8d0f1ce483d752dc44fb9a28e521677"
-  integrity sha512-0tOWIm4d/bAhr95PO/asjonyojAbLXBH6l1c7znFWqfrYQEq5wm5505e4dxomlvCWJFJr+H1oNTGp4yfl6PkEQ==
+"@pooltogether/react-components@^0.1.18":
+  version "0.1.18"
+  resolved "https://registry.yarnpkg.com/@pooltogether/react-components/-/react-components-0.1.18.tgz#257963c50d3b4b69d14f41816a4114783a4d6b0b"
+  integrity sha512-KJkx6/v/Lby6Rt2RBA6k1pklvnZ+BYcd2yduKZQXqXB1P4KKLOe65hAkpwsgRSW3HAHu89ZdVv65mp5qrrf80w==
   dependencies:
     "3box" "^1.19.1"
     "@pooltogether/evm-chains-extended" "^0.4.4"
