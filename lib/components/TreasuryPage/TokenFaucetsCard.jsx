@@ -1,7 +1,13 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 
-import { Amount, BasicTable, Card, TokenIcon } from '@pooltogether/react-components'
+import {
+  Amount,
+  BasicTable,
+  BlockExplorerLink,
+  Card,
+  TokenIcon
+} from '@pooltogether/react-components'
 import { NETWORK, numberWithCommas } from '@pooltogether/utilities'
 import { ScreenSize, useGovernanceChainId, useScreenSize } from '@pooltogether/hooks'
 
@@ -48,7 +54,7 @@ const TokensList = (props) => {
       },
       measureToken: {
         Header: 'Deposit token',
-        accessor: 'meeasureToken',
+        accessor: 'measureToken',
         className: '',
         Cell: (row) => <MeasureToken {...row.row.original} row={row} />
       },
@@ -69,6 +75,12 @@ const TokensList = (props) => {
         accessor: 'remainingDays',
         className: '',
         Cell: (row) => <RemainingDays {...row.row.original} row={row} />
+      },
+      explorerLink: {
+        Header: 'Faucet',
+        accessor: 'explorerLink',
+        className: 'w-min',
+        Cell: (row) => <ExplorerLink {...row.row.original} row={row} />
       }
     }
 
@@ -81,7 +93,8 @@ const TokensList = (props) => {
       rows.dripToken,
       rows.dripRate,
       rows.totalUnclaimed,
-      rows.remainingDays
+      rows.remainingDays,
+      rows.explorerLink
     ]
   }, [screenSize])
 
@@ -180,5 +193,19 @@ const RemainingDays = (props) => {
     <span className='flex my-2'>
       <Amount>{numberWithCommas(remainingDays)}</Amount>
     </span>
+  )
+}
+
+const ExplorerLink = (props) => {
+  const { chainId, address } = props
+
+  return (
+    <BlockExplorerLink
+      className='m-auto'
+      chainId={chainId}
+      address={address}
+      iconClassName='w-5 h-5'
+      noText
+    />
   )
 }
