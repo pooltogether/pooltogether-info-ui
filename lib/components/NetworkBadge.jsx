@@ -1,8 +1,8 @@
 import React from 'react'
 import classnames from 'classnames'
+import { NetworkIcon } from '@pooltogether/react-components'
+import { getNetworkNiceNameByChainId } from '@pooltogether/utilities'
 
-import { NetworkIcon } from 'lib/components/NetworkIcon'
-import { getNetworkNiceNameByChainId } from 'lib/utils/networks'
 import { networkTextColorClassname } from 'lib/utils/networkColorClassnames'
 
 export const NetworkBadge = (props) => {

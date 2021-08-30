@@ -27,9 +27,14 @@ export const TokenFaucetsCard = (props) => {
       <TokensList chainId={governanceChainId} />
 
       {isMainnet && (
-        <div className='mt-10'>
-          <TokensList chainId={NETWORK.matic} />
-        </div>
+        <>
+          <div className='mt-10'>
+            <TokensList chainId={NETWORK.matic} />
+          </div>
+          <div className='mt-10'>
+            <TokensList chainId={NETWORK.celo} />
+          </div>
+        </>
       )}
     </Card>
   )
