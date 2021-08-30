@@ -1,7 +1,13 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 
-import { Amount, BasicTable, Card, TokenIcon } from '@pooltogether/react-components'
+import {
+  Amount,
+  BasicTable,
+  BlockExplorerLink,
+  Card,
+  TokenIcon
+} from '@pooltogether/react-components'
 import { NETWORK, numberWithCommas } from '@pooltogether/utilities'
 import { ScreenSize, useGovernanceChainId, useScreenSize } from '@pooltogether/hooks'
 
@@ -21,9 +27,14 @@ export const TokenFaucetsCard = (props) => {
       <TokensList chainId={governanceChainId} />
 
       {isMainnet && (
-        <div className='mt-10'>
-          <TokensList chainId={NETWORK.matic} />
-        </div>
+        <>
+          <div className='mt-10'>
+            <TokensList chainId={NETWORK.matic} />
+          </div>
+          <div className='mt-10'>
+            <TokensList chainId={NETWORK.celo} />
+          </div>
+        </>
       )}
     </Card>
   )
@@ -33,7 +44,6 @@ const TokensList = (props) => {
   const { chainId } = props
 
   const { data: tokenFaucets, isFetched } = useTokenFaucets(chainId)
-  // const { data: tokenFaucets, isFetched } = useTokenFaucetsFlattened()
   const tokenFaucetsFlattened = tokenFaucets?.[chainId]
 
   const screenSize = useScreenSize()
@@ -41,14 +51,14 @@ const TokensList = (props) => {
   const columns = useMemo(() => {
     const rows = {
       dripToken: {
-        Header: 'Drip token',
+        Header: 'Drip',
         accessor: 'dripToken',
         className: '',
         Cell: (row) => <DripToken {...row.row.original} row={row} />
       },
       measureToken: {
-        Header: 'Deposit token',
-        accessor: 'meeasureToken',
+        Header: 'Deposit',
+        accessor: 'measureToken',
         className: '',
         Cell: (row) => <MeasureToken {...row.row.original} row={row} />
       },
@@ -65,15 +75,27 @@ const TokensList = (props) => {
         Cell: (row) => <TotalUnclaimed {...row.row.original} row={row} />
       },
       remainingDays: {
-        Header: 'Days remaining',
+        Header: 'Days left',
         accessor: 'remainingDays',
-        className: '',
+        className: 'w-20',
         Cell: (row) => <RemainingDays {...row.row.original} row={row} />
+      },
+      explorerLink: {
+        Header: '',
+        accessor: 'explorerLink',
+        className: 'w-8',
+        Cell: (row) => <ExplorerLink {...row.row.original} row={row} />
       }
     }
 
     if (screenSize < ScreenSize.sm) {
-      return [rows.measureToken, rows.dripToken, rows.dripRate, rows.remainingDays]
+      return [
+        rows.measureToken,
+        rows.dripToken,
+        rows.dripRate,
+        rows.remainingDays,
+        rows.explorerLink
+      ]
     }
 
     return [
@@ -81,7 +103,8 @@ const TokensList = (props) => {
       rows.dripToken,
       rows.dripRate,
       rows.totalUnclaimed,
-      rows.remainingDays
+      rows.remainingDays,
+      rows.explorerLink
     ]
   }, [screenSize])
 
@@ -180,5 +203,20 @@ const RemainingDays = (props) => {
     <span className='flex my-2'>
       <Amount>{numberWithCommas(remainingDays)}</Amount>
     </span>
+  )
+}
+
+const ExplorerLink = (props) => {
+  const { chainId, address } = props
+
+  return (
+    <BlockExplorerLink
+      shorten
+      noText
+      className='m-auto'
+      chainId={chainId}
+      address={address}
+      iconClassName='w-5 h-5'
+    />
   )
 }
