@@ -15,6 +15,8 @@ export const networkTextColorClassname = (chainId) => {
     return 'teal'
   } else if (chainId === 80001) {
     return 'teal'
+  } else if (chainId === 42220) {
+    return 'green'
   } else {
     return 'darkened'
   }
