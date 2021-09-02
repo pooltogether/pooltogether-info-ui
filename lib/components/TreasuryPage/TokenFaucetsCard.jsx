@@ -6,6 +6,8 @@ import {
   BasicTable,
   BlockExplorerLink,
   Card,
+  ExternalLink,
+  LinkTheme,
   TokenIcon
 } from '@pooltogether/react-components'
 import { NETWORK, numberWithCommas } from '@pooltogether/utilities'
@@ -14,6 +16,7 @@ import { ScreenSize, useGovernanceChainId, useScreenSize } from '@pooltogether/h
 import { NetworkBadge } from 'lib/components/NetworkBadge'
 import { LoadingRows } from 'lib/components/LoadingRows'
 import { useTokenFaucets } from 'lib/hooks/useTokenFaucets'
+import { DISCORD_INVITE_URL } from 'lib/constants'
 
 export const TokenFaucetsCard = (props) => {
   const { className } = props
@@ -22,7 +25,22 @@ export const TokenFaucetsCard = (props) => {
 
   return (
     <Card className={className}>
-      <h6 className='font-inter text-accent-2 text-xs uppercase mt-2 mb-8'>Token Faucets</h6>
+      <h6 className='font-inter text-accent-2 text-xs uppercase mt-2 mb-4'>Token Faucets</h6>
+
+      <p className='text-xs mb-8 text-accent-1'>
+        These are only the active faucets. Many will be refunded before expiring. For more info
+        check out our{' '}
+        <ExternalLink
+          className='text-xs'
+          theme={LinkTheme.light}
+          underline
+          href={DISCORD_INVITE_URL}
+          target='_blank'
+          rel='noopener'
+        >
+          Discord.
+        </ExternalLink>
+      </p>
 
       <TokensList chainId={governanceChainId} />
 
