@@ -129,7 +129,7 @@ const TokensList = (props) => {
   const data = useMemo(() => {
     let data = []
 
-    if (isFetched) {
+    if (isFetched && tokenFaucetsFlattened) {
       data = [...data, ...tokenFaucetsFlattened]
     }
 
@@ -173,7 +173,7 @@ const DripToken = (props) => {
   const { address, symbol } = dripToken
 
   return (
-    <span className='flex my-2'>
+    <span id={address} className='flex my-2'>
       <TokenIcon chainId={chainId} address={address} className='mr-2 sm:mr-4 my-auto' />
       <span className='font-bold'>{symbol}</span>
     </span>
@@ -185,7 +185,7 @@ const MeasureToken = (props) => {
   const { address, symbol } = measureToken
 
   return (
-    <span className='flex my-2'>
+    <span id={address} className='flex my-2'>
       <TokenIcon chainId={chainId} address={address} className='mr-2 sm:mr-4 my-auto' />
       <span className='font-bold'>{symbol}</span>
     </span>
