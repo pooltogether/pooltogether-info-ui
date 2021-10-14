@@ -17,7 +17,6 @@ import 'assets/styles/index.css'
 import 'assets/styles/info.css'
 import '@pooltogether/react-components/dist/index.css'
 import {
-  useInitializeOnboard,
   useInitInfuraId,
   useInitReducedMotion,
   useInitCookieOptions,
@@ -48,7 +47,7 @@ if (process.env.NEXT_JS_SENTRY_DSN) {
   })
 }
 
-function MyApp({ Component, pageProps, router }) {
+function MyApp ({ Component, pageProps, router }) {
   const { i18n } = useTranslation()
 
   useEffect(() => {
@@ -60,7 +59,7 @@ function MyApp({ Component, pageProps, router }) {
         includedDomains: ['vote.pooltogether.com']
       })
 
-      function onRouteChangeComplete(url) {
+      function onRouteChangeComplete (url) {
         if (window['fathom']) {
           window['fathom'].trackPageview()
         }
@@ -127,12 +126,7 @@ const InitPoolTogetherHooks = ({ children }) => {
   useInitTheGraphApiKey(process.env.NEXT_JS_THE_GRAPH_API_KEY)
   useInitReducedMotion(Boolean(process.env.NEXT_JS_REDUCE_MOTION))
   useInitCookieOptions(process.env.NEXT_JS_DOMAIN_NAME)
-  useInitializeOnboard({
-    infuraId: process.env.NEXT_JS_INFURA_ID,
-    fortmaticKey: process.env.NEXT_JS_FORTMATIC_API_KEY,
-    portisKey: process.env.NEXT_JS_PORTIS_API_KEY,
-    defaultNetworkName: process.env.NEXT_JS_DEFAULT_ETHEREUM_NETWORK_NAME
-  })
+
   return children
 }
 

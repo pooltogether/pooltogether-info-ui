@@ -11,10 +11,11 @@ import {
   TokenIcon
 } from '@pooltogether/react-components'
 import { NETWORK, numberWithCommas } from '@pooltogether/utilities'
-import { ScreenSize, useGovernanceChainId, useScreenSize } from '@pooltogether/hooks'
+import { ScreenSize, useScreenSize } from '@pooltogether/hooks'
 
 import { NetworkBadge } from 'lib/components/NetworkBadge'
 import { LoadingRows } from 'lib/components/LoadingRows'
+import { useGovernanceChainId } from 'lib/hooks/useGovernanceChainId'
 import { useTokenFaucets } from 'lib/hooks/useTokenFaucets'
 import { DISCORD_INVITE_URL, POOLTOGETHER_GOV_FORUM_URL } from 'lib/constants'
 
@@ -27,9 +28,9 @@ export const TokenFaucetsCard = (props) => {
     <Card className={className}>
       <h6 className='font-inter text-accent-2 text-xs uppercase mt-2 mb-4'>Token Faucets</h6>
 
-      <p className='text-xs mb-8 text-accent-1 leading-normal w-2/3'>
-        These are the PoolTogether Rewards faucets. For info about which ones will be refunded
-        before they expire check out our{' '}
+      <p className='text-xs mb-8 text-accent-1 leading-normal w-3/4'>
+        These are the PoolTogether Rewards faucets. Many will be extended before they expire by POOL
+        governance. Check out our{' '}
         <ExternalLink
           className='text-xs'
           theme={LinkTheme.light}
@@ -50,8 +51,8 @@ export const TokenFaucetsCard = (props) => {
           rel='noopener'
         >
           Discord
-        </ExternalLink>
-        .
+        </ExternalLink>{' '}
+        for the latest info.
       </p>
 
       <TokensList chainId={governanceChainId} />
