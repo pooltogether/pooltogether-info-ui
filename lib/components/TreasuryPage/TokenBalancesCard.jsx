@@ -18,6 +18,7 @@ import {
   useGovernanceTokenBalancesFlattened
 } from 'lib/hooks/useGovernanceTokenBalances'
 import { useVestingPoolBalance } from 'lib/hooks/useVestingPoolBalance'
+import { useOlympusProBondBalance } from 'lib/hooks/useOlympusProBondBalance'
 
 export const TokenBalancesCard = (props) => {
   const { className } = props
@@ -56,6 +57,8 @@ const TokensList = () => {
   const { data: vestingPoolBalance, isFetched: isVestingPoolBalanceFetched } =
     useVestingPoolBalance()
 
+  const { data: bondBalance, isFetched: isBondBalanceFetched } = useOlympusProBondBalance()
+
   const screenSize = useScreenSize()
 
   const columns = useMemo(() => {
@@ -88,17 +91,28 @@ const TokensList = () => {
     let data = []
 
     if (isVestingPoolBalanceFetched) {
-      data = [vestingPoolBalance]
+      data.push(vestingPoolBalance)
+    }
+
+    if (isBondBalanceFetched) {
+      data.push(bondBalance)
     }
 
     if (isFetched) {
-      data = [...data, ...tokenBalances]
+      data.push(...tokenBalances)
     }
 
     data = data.filter((balance) => !balance.amountUnformatted.isZero())
 
     return data
-  }, [vestingPoolBalance, isVestingPoolBalanceFetched, tokenBalances, isFetched])
+  }, [
+    vestingPoolBalance,
+    isVestingPoolBalanceFetched,
+    isBondBalanceFetched,
+    bondBalance,
+    tokenBalances,
+    isFetched
+  ])
 
   const tableInstance = useTable({
     columns,

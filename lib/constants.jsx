@@ -41,7 +41,8 @@ export const CONTRACT_ADDRESSES = {
     GovernanceTimelock: '0x42cd8312d2bce04277dd5161832460e95b24262e',
     GovernanceToken: '0x0cec1a9154ff802e7934fc916ed7ca50bde6844e',
     TreasuryVester: '0x21950e281bde1714ffd1062ed17c56d4d8de2359',
-    Stablecoin: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+    Stablecoin: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+    BondTreasury: '0x7437e08982a39fca561c1ca1da1d23ff26fe2b93'
   },
   4: {
     GovernanceTimelock: '0x8df0afb54836dc8d0ae795503f837cff197d3df1',

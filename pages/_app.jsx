@@ -9,10 +9,6 @@ import { Provider } from 'jotai'
 
 import { AllContextProviders } from 'lib/components/contextProviders/AllContextProviders'
 
-import '@reach/dialog/styles.css'
-import '@reach/menu-button/styles.css'
-import '@reach/tooltip/styles.css'
-
 import 'assets/styles/index.css'
 import 'assets/styles/info.css'
 import '@pooltogether/react-components/dist/index.css'
@@ -47,7 +43,7 @@ if (process.env.NEXT_JS_SENTRY_DSN) {
   })
 }
 
-function MyApp ({ Component, pageProps, router }) {
+function MyApp({ Component, pageProps, router }) {
   const { i18n } = useTranslation()
 
   useEffect(() => {
@@ -59,7 +55,7 @@ function MyApp ({ Component, pageProps, router }) {
         includedDomains: ['vote.pooltogether.com']
       })
 
-      function onRouteChangeComplete (url) {
+      function onRouteChangeComplete(url) {
         if (window['fathom']) {
           window['fathom'].trackPageview()
         }
@@ -126,7 +122,6 @@ const InitPoolTogetherHooks = ({ children }) => {
   useInitTheGraphApiKey(process.env.NEXT_JS_THE_GRAPH_API_KEY)
   useInitReducedMotion(Boolean(process.env.NEXT_JS_REDUCE_MOTION))
   useInitCookieOptions(process.env.NEXT_JS_DOMAIN_NAME)
-
   return children
 }
 
