@@ -11,7 +11,6 @@ import { AllContextProviders } from 'lib/components/contextProviders/AllContextP
 
 import 'assets/styles/index.css'
 import 'assets/styles/info.css'
-import '@pooltogether/react-components/dist/index.css'
 import {
   useInitInfuraId,
   useInitReducedMotion,
