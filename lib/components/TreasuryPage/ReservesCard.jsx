@@ -142,8 +142,13 @@ const UsdAmount = (props) => {
 
 const Links = (props) => {
   const { prizePool, symbol, chainId, token } = props
-  const { address } = prizePool
   const { symbol: ticker } = token
+
+  if (!prizePool) {
+    return <span className='flex justify-end'></span>
+  }
+
+  const { address } = prizePool
 
   const path = symbol || getPrizePoolSymbol(ticker, address)
   return (

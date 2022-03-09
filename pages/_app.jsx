@@ -12,11 +12,10 @@ import { AllContextProviders } from 'lib/components/contextProviders/AllContextP
 import 'assets/styles/index.css'
 import 'assets/styles/info.css'
 import {
-  useInitInfuraId,
   useInitReducedMotion,
   useInitCookieOptions,
   useInitTheGraphApiKey,
-  useInitQuickNodeId
+  initProviderApiKeys
 } from '@pooltogether/hooks'
 import {
   ToastContainer,
@@ -27,6 +26,14 @@ import {
 import '../i18n'
 import { useTranslation } from 'react-i18next'
 import { CustomErrorBoundary } from 'lib/components/CustomErrorBoundary'
+
+// Initialize read provider API keys
+initProviderApiKeys({
+  // alchemy: process.env.NEXT_JS_ALCHEMY_API_KEY,
+  // etherscan: process.env.NEXT_JS_ETHERSCAN_API_KEY,
+  infura: process.env.NEXT_JS_INFURA_ID
+  // quiknode: process.env.NEXT_JS_QUICKNODE_ID
+})
 
 const queryClient = new QueryClient()
 
@@ -42,7 +49,7 @@ if (process.env.NEXT_JS_SENTRY_DSN) {
   })
 }
 
-function MyApp({ Component, pageProps, router }) {
+function MyApp ({ Component, pageProps, router }) {
   const { i18n } = useTranslation()
 
   useEffect(() => {
@@ -54,7 +61,7 @@ function MyApp({ Component, pageProps, router }) {
         includedDomains: ['vote.pooltogether.com']
       })
 
-      function onRouteChangeComplete(url) {
+      function onRouteChangeComplete (url) {
         if (window['fathom']) {
           window['fathom'].trackPageview()
         }
@@ -116,9 +123,6 @@ function MyApp({ Component, pageProps, router }) {
 }
 
 const InitPoolTogetherHooks = ({ children }) => {
-  useInitInfuraId(process.env.NEXT_JS_INFURA_ID)
-  useInitQuickNodeId(process.env.NEXT_JS_QUICKNODE_ID)
-  useInitTheGraphApiKey(process.env.NEXT_JS_THE_GRAPH_API_KEY)
   useInitReducedMotion(Boolean(process.env.NEXT_JS_REDUCE_MOTION))
   useInitCookieOptions(process.env.NEXT_JS_DOMAIN_NAME)
   return children

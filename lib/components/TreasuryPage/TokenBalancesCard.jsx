@@ -38,11 +38,11 @@ export const TokenBalancesCard = (props) => {
       </h4>
       <TokensList />
 
-      <h6 className='font-inter text-accent-2 uppercase mt-2'>
+      <h6 className='font-inter   uppercase mt-2'>
         <BlockExplorerLink
           chainId={1}
           address={CONTRACT_ADDRESSES[1].GovernanceTimelock}
-          className='opacity-60 hover:opacity-100 text-xs mt-4'
+          className='opacity-90 hover:opacity-100 text-xs mt-4 text-highlight-1'
         >
           Governance Timelock
         </BlockExplorerLink>
@@ -54,8 +54,10 @@ export const TokenBalancesCard = (props) => {
 const TokensList = () => {
   const { data: tokenBalances, isFetched } = useGovernanceTokenBalancesFlattened()
 
-  const { data: vestingPoolBalance, isFetched: isVestingPoolBalanceFetched } =
-    useVestingPoolBalance()
+  const {
+    data: vestingPoolBalance,
+    isFetched: isVestingPoolBalanceFetched
+  } = useVestingPoolBalance()
 
   const { data: bondBalance, isFetched: isBondBalanceFetched } = useOlympusProBondBalance()
 

@@ -17,6 +17,15 @@ const nextConfig = {
   },
   compress: false,
   inlineImageLimit: 48, // make it tiny so that it doesn't inline,
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/treasury',
+        permanent: false,
+      }
+    ]
+  },
 }
 
 const allConfig =
