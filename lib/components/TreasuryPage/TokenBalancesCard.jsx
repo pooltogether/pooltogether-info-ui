@@ -19,6 +19,9 @@ import {
 } from 'lib/hooks/useGovernanceTokenBalances'
 import { useVestingPoolBalance } from 'lib/hooks/useVestingPoolBalance'
 import { useOlympusProBondBalance } from 'lib/hooks/useOlympusProBondBalance'
+import { useTimelockTreasuryPTaUSDCBalance } from 'lib/hooks/useTimelockTreasuryPTaUSDCBalance'
+
+const PTaUSDC_ETHEREUM_ADDRESS = '0xdd4d117723c257cee402285d3acf218e9a8236e1'
 
 export const TokenBalancesCard = (props) => {
   const { className } = props
@@ -61,6 +64,11 @@ const TokensList = () => {
 
   const { data: bondBalance, isFetched: isBondBalanceFetched } = useOlympusProBondBalance()
 
+  const {
+    data: ptausdcTimelockTreasuryBalance,
+    isFetched: isPTaUSDCTimelockTreasuryBalanceFetched
+  } = useTimelockTreasuryPTaUSDCBalance()
+
   const screenSize = useScreenSize()
 
   const columns = useMemo(() => {
@@ -98,6 +106,13 @@ const TokensList = () => {
 
     if (isBondBalanceFetched) {
       data.push(bondBalance)
+    }
+
+    if (isPTaUSDCTimelockTreasuryBalanceFetched) {
+      data.push({
+        ...ptausdcTimelockTreasuryBalance,
+        address: PTaUSDC_ETHEREUM_ADDRESS
+      })
     }
 
     if (isFetched) {

@@ -109,6 +109,7 @@ const ReservesList = (props) => {
 const Symbol = (props) => {
   const { chainId, token } = props
   const { symbol, address } = token
+
   return (
     <span className='flex my-2'>
       <TokenIcon chainId={chainId} address={address} className='mr-2 sm:mr-4 my-auto' />
