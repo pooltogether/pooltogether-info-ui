@@ -59,6 +59,7 @@ export const QUERY_KEYS = {
   getTokenFaucets: 'getTokenFaucets',
   getPrizePoolReserves: 'getPrizePoolReserves',
   getTokenBalances: 'getTokenBalances',
+  getAaveRewardsBalances: 'getAaveRewardsBalances',
   getTokenPrices: 'getTokenPrices'
 }
 

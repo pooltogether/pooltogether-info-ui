@@ -17,6 +17,7 @@ import {
   useGovernanceTokenBalancesTotal,
   useGovernanceTokenBalancesFlattened
 } from 'lib/hooks/useGovernanceTokenBalances'
+import { useAaveRewardsBalances } from 'lib/hooks/useAaveRewardsBalances'
 import { useVestingPoolBalance } from 'lib/hooks/useVestingPoolBalance'
 import { useOlympusProBondBalance } from 'lib/hooks/useOlympusProBondBalance'
 import { useTimelockTreasuryPTaUSDCBalance } from 'lib/hooks/useTimelockTreasuryPTaUSDCBalance'
@@ -69,6 +70,11 @@ const TokensList = () => {
     isFetched: isPTaUSDCTimelockTreasuryBalanceFetched
   } = useTimelockTreasuryPTaUSDCBalance()
 
+  const {
+    data: aaveRewardsBalance,
+    isFetched: isAaveRewardsBalanceFetched
+  } = useAaveRewardsBalances()
+
   const screenSize = useScreenSize()
 
   const columns = useMemo(() => {
@@ -117,6 +123,10 @@ const TokensList = () => {
 
     if (isFetched) {
       data.push(...tokenBalances)
+    }
+
+    if (isAaveRewardsBalanceFetched) {
+      data = extractAaveRewardsData(data, aaveRewardsBalance)
     }
 
     data = data.filter((balance) => !balance.amountUnformatted.isZero())
@@ -171,11 +181,12 @@ const Symbol = (props) => {
 }
 
 const TokenAmount = (props) => {
-  const { symbol, amount } = props
+  const { isUnclaimedReward, symbol, amount } = props
   return (
     <span className='flex my-2'>
       <Amount>{numberWithCommas(amount, { precision: getMinPrecision(amount) })}</Amount>
       <span className='ml-1 opacity-40'>{symbol}</span>
+      <span className='ml-1 opacity-20'>{isUnclaimedReward && '(unclaimed)'}</span>
     </span>
   )
 }
@@ -187,4 +198,26 @@ const UsdAmount = (props) => {
       $<Amount>{numberWithCommas(totalValueUsd, { precision: 2 })}</Amount>
     </span>
   )
+}
+
+const extractAaveRewardsData = (data, aaveRewardsBalance) => {
+  if (!aaveRewardsBalance) {
+    return data
+  }
+
+  const chainIds = Object.keys(aaveRewardsBalance)
+
+  chainIds.forEach((chainId) => {
+    const balances = aaveRewardsBalance[chainId]
+    balances.forEach((balance) => {
+      data.push({
+        chainId,
+        isUnclaimedReward: true,
+        ...balance
+        // address: PTaUSDC_ETHEREUM_ADDRESS
+      })
+    })
+  })
+
+  return data
 }
