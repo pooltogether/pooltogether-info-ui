@@ -11,7 +11,7 @@ import { TreasuryTotalBanner } from 'lib/components/TreasuryPage/TreasuryTotalBa
 export const TreasuryPage = (props) => {
   return (
     <>
-      <Meta title='Overview' />
+      <Meta title='Treasury' />
 
       <Layout>
         <Nav />

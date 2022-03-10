@@ -8,7 +8,7 @@ import { TokenFaucetsCard } from 'lib/components/TreasuryPage/TokenFaucetsCard'
 export const FaucetsPage = (props) => {
   return (
     <>
-      <Meta title='Faucets - Protocol Analytics' />
+      <Meta title='Faucets' />
       <Layout>
         <Nav />
 

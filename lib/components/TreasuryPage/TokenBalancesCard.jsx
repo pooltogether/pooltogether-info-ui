@@ -8,8 +8,8 @@ import {
   Card,
   TokenIcon
 } from '@pooltogether/react-components'
-import { ScreenSize, useScreenSize } from '@pooltogether/hooks'
-import { getMinPrecision, numberWithCommas } from '@pooltogether/utilities'
+import { ScreenSize, useCoingeckoTokenPrices, useScreenSize } from '@pooltogether/hooks'
+import { numberWithCommas } from '@pooltogether/utilities'
 
 import { CONTRACT_ADDRESSES } from 'lib/constants'
 import { LoadingRows } from 'lib/components/LoadingRows'
@@ -92,7 +92,12 @@ const TokensList = () => {
       usd: {
         accessor: 'totalValueUsd',
         className: '',
-        Cell: (row) => <UsdAmount {...row.row.original} row={row} />
+        Cell: (row) =>
+          row.row.original.totalValueUsd ? (
+            <UsdAmount {...row.row.original} row={row} />
+          ) : (
+            <UsdAmountFromCoingekco {...row.row.original} row={row} />
+          )
       }
     }
 
@@ -189,6 +194,17 @@ const TokenAmount = (props) => {
       <span className='ml-1 opacity-30'>{isUnclaimedReward && '(unclaimed)'}</span>
     </span>
   )
+}
+
+const UsdAmountFromCoingekco = (props) => {
+  const { address, chainId, amount } = props
+
+  const { data: usdData } = useCoingeckoTokenPrices(chainId, [address])
+
+  const usd = usdData?.[address]?.usd
+  const totalValueUsd = Number(amount) * usd
+
+  return <UsdAmount totalValueUsd={totalValueUsd} />
 }
 
 const UsdAmount = (props) => {

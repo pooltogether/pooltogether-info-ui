@@ -3,15 +3,13 @@
 
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
-import { Meta } from 'lib/components/Meta'
-
 class MyDocument extends Document {
-  static async getInitialProps(ctx) {
+  static async getInitialProps (ctx) {
     const initialProps = await Document.getInitialProps(ctx)
     return { ...initialProps }
   }
 
-  render() {
+  render () {
     const title = `PoolTogether Protocol Analytics`
 
     const url = `https://info.pooltogether.com`
@@ -21,7 +19,6 @@ class MyDocument extends Document {
 
     return (
       <Html>
-        <Head />
         <Head>
           <>
             <link rel='icon' href='/favicon.png' type='image/x-icon' />
