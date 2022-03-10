@@ -184,9 +184,9 @@ const TokenAmount = (props) => {
   const { isUnclaimedReward, symbol, amount } = props
   return (
     <span className='flex my-2'>
-      <Amount>{numberWithCommas(amount, { precision: getMinPrecision(amount) })}</Amount>
-      <span className='ml-1 opacity-40'>{symbol}</span>
-      <span className='ml-1 opacity-20'>{isUnclaimedReward && '(unclaimed)'}</span>
+      <Amount>{numberWithCommas(amount)}</Amount>
+      <span className='ml-1 opacity-60'>{symbol}</span>
+      <span className='ml-1 opacity-30'>{isUnclaimedReward && '(unclaimed)'}</span>
     </span>
   )
 }
