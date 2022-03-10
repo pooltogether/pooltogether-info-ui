@@ -8,8 +8,8 @@ import {
   Card,
   TokenIcon
 } from '@pooltogether/react-components'
-import { ScreenSize, useScreenSize } from '@pooltogether/hooks'
-import { getMinPrecision, numberWithCommas } from '@pooltogether/utilities'
+import { ScreenSize, useCoingeckoTokenPrices, useScreenSize } from '@pooltogether/hooks'
+import { numberWithCommas } from '@pooltogether/utilities'
 
 import { CONTRACT_ADDRESSES } from 'lib/constants'
 import { LoadingRows } from 'lib/components/LoadingRows'
@@ -17,8 +17,12 @@ import {
   useGovernanceTokenBalancesTotal,
   useGovernanceTokenBalancesFlattened
 } from 'lib/hooks/useGovernanceTokenBalances'
+import { useAaveRewardsBalances } from 'lib/hooks/useAaveRewardsBalances'
 import { useVestingPoolBalance } from 'lib/hooks/useVestingPoolBalance'
 import { useOlympusProBondBalance } from 'lib/hooks/useOlympusProBondBalance'
+import { useTimelockTreasuryPTaUSDCBalance } from 'lib/hooks/useTimelockTreasuryPTaUSDCBalance'
+
+const PTaUSDC_ETHEREUM_ADDRESS = '0xdd4d117723c257cee402285d3acf218e9a8236e1'
 
 export const TokenBalancesCard = (props) => {
   const { className } = props
@@ -38,11 +42,11 @@ export const TokenBalancesCard = (props) => {
       </h4>
       <TokensList />
 
-      <h6 className='font-inter text-accent-2 uppercase mt-2'>
+      <h6 className='font-inter   uppercase mt-2'>
         <BlockExplorerLink
           chainId={1}
           address={CONTRACT_ADDRESSES[1].GovernanceTimelock}
-          className='opacity-60 hover:opacity-100 text-xs mt-4'
+          className='opacity-90 hover:opacity-100 text-xs mt-4 text-highlight-1'
         >
           Governance Timelock
         </BlockExplorerLink>
@@ -54,10 +58,22 @@ export const TokenBalancesCard = (props) => {
 const TokensList = () => {
   const { data: tokenBalances, isFetched } = useGovernanceTokenBalancesFlattened()
 
-  const { data: vestingPoolBalance, isFetched: isVestingPoolBalanceFetched } =
-    useVestingPoolBalance()
+  const {
+    data: vestingPoolBalance,
+    isFetched: isVestingPoolBalanceFetched
+  } = useVestingPoolBalance()
 
   const { data: bondBalance, isFetched: isBondBalanceFetched } = useOlympusProBondBalance()
+
+  const {
+    data: ptausdcTimelockTreasuryBalance,
+    isFetched: isPTaUSDCTimelockTreasuryBalanceFetched
+  } = useTimelockTreasuryPTaUSDCBalance()
+
+  const {
+    data: aaveRewardsBalance,
+    isFetched: isAaveRewardsBalanceFetched
+  } = useAaveRewardsBalances()
 
   const screenSize = useScreenSize()
 
@@ -76,7 +92,12 @@ const TokensList = () => {
       usd: {
         accessor: 'totalValueUsd',
         className: '',
-        Cell: (row) => <UsdAmount {...row.row.original} row={row} />
+        Cell: (row) =>
+          row.row.original.totalValueUsd ? (
+            <UsdAmount {...row.row.original} row={row} />
+          ) : (
+            <UsdAmountFromCoingekco {...row.row.original} row={row} />
+          )
       }
     }
 
@@ -98,8 +119,19 @@ const TokensList = () => {
       data.push(bondBalance)
     }
 
+    if (isPTaUSDCTimelockTreasuryBalanceFetched) {
+      data.push({
+        ...ptausdcTimelockTreasuryBalance,
+        address: PTaUSDC_ETHEREUM_ADDRESS
+      })
+    }
+
     if (isFetched) {
       data.push(...tokenBalances)
+    }
+
+    if (isAaveRewardsBalanceFetched) {
+      data = extractAaveRewardsData(data, aaveRewardsBalance)
     }
 
     data = data.filter((balance) => !balance.amountUnformatted.isZero())
@@ -154,13 +186,25 @@ const Symbol = (props) => {
 }
 
 const TokenAmount = (props) => {
-  const { symbol, amount } = props
+  const { isUnclaimedReward, symbol, amount } = props
   return (
     <span className='flex my-2'>
-      <Amount>{numberWithCommas(amount, { precision: getMinPrecision(amount) })}</Amount>
-      <span className='ml-1 opacity-40'>{symbol}</span>
+      <Amount>{numberWithCommas(amount)}</Amount>
+      <span className='ml-1 opacity-60'>{symbol}</span>
+      <span className='ml-1 opacity-30'>{isUnclaimedReward && '(unclaimed)'}</span>
     </span>
   )
+}
+
+const UsdAmountFromCoingekco = (props) => {
+  const { address, chainId, amount } = props
+
+  const { data: usdData } = useCoingeckoTokenPrices(chainId, [address])
+
+  const usd = usdData?.[address]?.usd
+  const totalValueUsd = Number(amount) * usd
+
+  return <UsdAmount totalValueUsd={totalValueUsd} />
 }
 
 const UsdAmount = (props) => {
@@ -170,4 +214,25 @@ const UsdAmount = (props) => {
       $<Amount>{numberWithCommas(totalValueUsd, { precision: 2 })}</Amount>
     </span>
   )
+}
+
+const extractAaveRewardsData = (data, aaveRewardsBalance) => {
+  if (!aaveRewardsBalance) {
+    return data
+  }
+
+  const chainIds = Object.keys(aaveRewardsBalance)
+
+  chainIds.forEach((chainId) => {
+    const balances = aaveRewardsBalance[chainId]
+    balances.forEach((balance) => {
+      data.push({
+        chainId,
+        isUnclaimedReward: true,
+        ...balance
+      })
+    })
+  })
+
+  return data
 }

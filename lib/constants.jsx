@@ -1,6 +1,3 @@
-import PoolWithMultipleWinnersBuilderMainnet from '@pooltogether/pooltogether-contracts/deployments/mainnet/PoolWithMultipleWinnersBuilder.json'
-import PoolWithMultipleWinnersBuilderRinkeby from '@pooltogether/pooltogether-contracts/deployments/rinkeby/PoolWithMultipleWinnersBuilder.json'
-
 export const SUPPORTED_CHAIN_IDS = [1, 4, 31337, 1234]
 
 export const SECONDS_PER_BLOCK = 13
@@ -59,6 +56,7 @@ export const QUERY_KEYS = {
   getTokenFaucets: 'getTokenFaucets',
   getPrizePoolReserves: 'getPrizePoolReserves',
   getTokenBalances: 'getTokenBalances',
+  getAaveRewardsBalances: 'getAaveRewardsBalances',
   getTokenPrices: 'getTokenPrices'
 }
 

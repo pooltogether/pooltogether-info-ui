@@ -109,6 +109,7 @@ const ReservesList = (props) => {
 const Symbol = (props) => {
   const { chainId, token } = props
   const { symbol, address } = token
+
   return (
     <span className='flex my-2'>
       <TokenIcon chainId={chainId} address={address} className='mr-2 sm:mr-4 my-auto' />
@@ -124,8 +125,8 @@ const TokenAmount = (props) => {
   const { symbol, amount } = token
   return (
     <span className='flex my-2'>
-      <Amount>{numberWithCommas(amount, { precision: getMinPrecision(amount) })}</Amount>
-      <span className='ml-1 opacity-40'>{symbol}</span>
+      <Amount>{numberWithCommas(amount)}</Amount>
+      <span className='ml-1 opacity-60'>{symbol}</span>
     </span>
   )
 }
@@ -142,8 +143,13 @@ const UsdAmount = (props) => {
 
 const Links = (props) => {
   const { prizePool, symbol, chainId, token } = props
-  const { address } = prizePool
   const { symbol: ticker } = token
+
+  if (!prizePool) {
+    return <span className='flex justify-end'></span>
+  }
+
+  const { address } = prizePool
 
   const path = symbol || getPrizePoolSymbol(ticker, address)
   return (

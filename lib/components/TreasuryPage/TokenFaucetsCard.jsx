@@ -60,7 +60,7 @@ export const TokenFaucetsCard = (props) => {
       {isMainnet && (
         <>
           <div className='mt-10'>
-            <TokensList chainId={NETWORK.matic} />
+            <TokensList chainId={NETWORK.polygon} />
           </div>
           <div className='mt-10'>
             <TokensList chainId={NETWORK.celo} />
@@ -212,7 +212,7 @@ const TotalUnclaimed = (props) => {
   return (
     <span className='flex my-2'>
       <Amount>{numberWithCommas(totalUnclaimed)}</Amount>
-      <span className='ml-1 opacity-40'>{symbol}</span>
+      <span className='ml-1 opacity-60'>{symbol}</span>
     </span>
   )
 }
