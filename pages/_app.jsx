@@ -29,10 +29,7 @@ import { CustomErrorBoundary } from 'lib/components/CustomErrorBoundary'
 
 // Initialize read provider API keys
 initProviderApiKeys({
-  // alchemy: process.env.NEXT_JS_ALCHEMY_API_KEY,
-  // etherscan: process.env.NEXT_JS_ETHERSCAN_API_KEY,
   infura: process.env.NEXT_JS_INFURA_ID
-  // quiknode: process.env.NEXT_JS_QUICKNODE_ID
 })
 
 const queryClient = new QueryClient()

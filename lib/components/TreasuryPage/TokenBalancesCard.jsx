@@ -230,7 +230,6 @@ const extractAaveRewardsData = (data, aaveRewardsBalance) => {
         chainId,
         isUnclaimedReward: true,
         ...balance
-        // address: PTaUSDC_ETHEREUM_ADDRESS
       })
     })
   })
