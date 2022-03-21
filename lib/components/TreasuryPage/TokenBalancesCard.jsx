@@ -31,7 +31,7 @@ export const TokenBalancesCard = (props) => {
 
   return (
     <Card className={className}>
-      <h6 className='font-inter text-accent-2 text-xs uppercase mt-2 mb-4'>Token Holdings</h6>
+      <h6 className='font-averta text-accent-2 text-xs uppercase mt-2 mb-4'>Token Holdings</h6>
       <h4 className='mb-4 sm:mb-8'>
         $
         {isFetched ? (
@@ -42,7 +42,7 @@ export const TokenBalancesCard = (props) => {
       </h4>
       <TokensList />
 
-      <h6 className='font-inter   uppercase mt-2'>
+      <h6 className='font-averta   uppercase mt-2'>
         <BlockExplorerLink
           chainId={1}
           address={CONTRACT_ADDRESSES[1].GovernanceTimelock}
@@ -134,7 +134,7 @@ const TokensList = () => {
       data = extractAaveRewardsData(data, aaveRewardsBalance)
     }
 
-    data = data.filter((balance) => !balance.amountUnformatted.isZero())
+    data = data.filter((balance) => !balance.amountUnformatted?.isZero())
 
     return data
   }, [

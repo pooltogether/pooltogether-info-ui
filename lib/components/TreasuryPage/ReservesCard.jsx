@@ -10,7 +10,6 @@ import {
   TokenIcon
 } from '@pooltogether/react-components'
 import {
-  getMinPrecision,
   getNetworkNameAliasByChainId,
   getPrizePoolSymbol,
   numberWithCommas
@@ -29,7 +28,7 @@ export const ReservesCard = (props) => {
 
   return (
     <Card className={className}>
-      <h6 className='font-inter text-accent-2 text-xs uppercase mt-2 mb-4'>Prize Pool Reserves</h6>
+      <h6 className='font-averta text-accent-2 text-xs uppercase mt-2 mb-4'>Prize Pool Reserves</h6>
       <h4 className='mb-4 sm:mb-8'>
         $
         {isFetched ? (
@@ -84,9 +83,8 @@ const ReservesList = (props) => {
 
     if (isFetched) {
       data = reserves
+      data = data.filter((reserve) => !reserve.token.amountUnformatted.isZero())
     }
-
-    data = data.filter((reserve) => !reserve.token.amountUnformatted.isZero())
 
     return data
   }, [reserves, isFetched])
@@ -111,7 +109,7 @@ const Symbol = (props) => {
   const { symbol, address } = token
 
   return (
-    <span className='flex my-2'>
+    <span className='flex items-center truncate xs:w-auto'>
       <TokenIcon chainId={chainId} address={address} className='mr-2 sm:mr-4 my-auto' />
       <BlockExplorerLink chainId={chainId} address={address}>
         <span className='font-bold'>{symbol}</span>

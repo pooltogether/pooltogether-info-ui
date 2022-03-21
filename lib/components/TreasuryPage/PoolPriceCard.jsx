@@ -11,7 +11,7 @@ export const PoolPriceCard = (props) => {
 
   return (
     <Card className={className}>
-      <h6 className='font-inter text-accent-2 text-xs uppercase mb-4'>POOL Price</h6>
+      <h6 className='font-averta text-accent-2 text-xs uppercase mb-4'>POOL Price</h6>
       <div className='flex flex-row justify-between'>
         <h4>
           ${poolPrice ? <Amount>{numberWithCommas(poolPrice.usd, { precision: 2 })}</Amount> : '--'}

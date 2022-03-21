@@ -9,7 +9,7 @@ th {
 }
 
 th {
-  @apply font-inter uppercase pb-2 opacity-60 text-accent-1;
+  @apply font-averta uppercase pb-2 opacity-60 text-accent-1;
 }
 
 tr:hover td {

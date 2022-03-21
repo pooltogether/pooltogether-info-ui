@@ -11,7 +11,7 @@ export const TreasuryTotalBanner = (props) => {
 
   return (
     <Banner className={className}>
-      <h6 className='font-inter text-white text-xs uppercase mb-4'>Treasury Balance</h6>
+      <h6 className='font-averta text-white text-xs uppercase mb-4'>Treasury Balance</h6>
       <h1 className='text-white'>
         $
         {isFetched && data?.totalValueUsd ? (

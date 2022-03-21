@@ -26,7 +26,7 @@ export const TokenFaucetsCard = (props) => {
 
   return (
     <Card className={className}>
-      <h6 className='font-inter text-accent-2 text-xs uppercase mt-2 mb-4'>Token Faucets</h6>
+      <h6 className='font-averta text-accent-2 text-xs uppercase mt-2 mb-4'>Token Faucets</h6>
 
       <p className='text-xs mb-8 text-accent-1 leading-normal w-3/4'>
         These are the PoolTogether Rewards faucets. Many will be extended before they expire by POOL
