@@ -2309,17 +2309,16 @@
   resolved "https://registry.yarnpkg.com/@pooltogether/hooks/-/hooks-1.5.2.tgz#330d484076569ee5e1e90b847068f53f606959f4"
   integrity sha512-or2qhbMO4xEAXR/UUOKlxWeM5S87e3OwEPcLls/5mNw2rPI1iniE1gdfWiEOFb2bimBd0GSZEWZe0h6TGqQYpg==
 
-"@pooltogether/pooltogether-contracts@^3.3.8":
-  version "3.3.10"
-  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-contracts/-/pooltogether-contracts-3.3.10.tgz#cf332c7a9806e5f11c622dd1f75703afcbbdb024"
-  integrity sha512-U4nnUv/zuC3x4OkpXAzaHVfQ2TFTKYfQ5xQmKmzVvX2ekeblZcyL3gfEgHTcOjJK8fNGtsQ500uGPcBBoyJYkA==
+"@pooltogether/pooltogether-contracts@^3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-contracts/-/pooltogether-contracts-3.4.5.tgz#b9e80516d6a256564c6979939bc84933794f8cf4"
+  integrity sha512-Y0Nj8zWurDG1bZS3vWlF+0wZHdHdbhPi0KvoUTh0OYKqYW6MQkhVck+1CrRjExGZRnYvIjX2o/g3eqJGTSPOiQ==
   dependencies:
     "@openzeppelin/contracts-upgradeable" "3.4.0"
     "@pooltogether/fixed-point" "1.0.0-beta.2"
     "@pooltogether/pooltogether-rng-contracts" "1.0.0"
     "@pooltogether/uniform-random-number" "1.0.0-beta.1"
     "@pooltogether/yield-source-interface" "^1.0.1"
-    deploy-eip-1820 "1.0.0"
     sortition-sum-tree-factory "0.1.0"
 
 "@pooltogether/pooltogether-rng-contracts@1.0.0":
@@ -2327,10 +2326,10 @@
   resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-rng-contracts/-/pooltogether-rng-contracts-1.0.0.tgz#191d155dc960559cce06b7ec3b0f9ed2caed0f46"
   integrity sha512-jQub/+qPLQwTFtbBCvvyIEqxJDEBEV/hgLKnuocBg2/GySWtHLz67WCy17bNn1hZw8nWIt8Ih8h+7iT2UJhtmQ==
 
-"@pooltogether/react-components@^1.7.5":
-  version "1.7.5"
-  resolved "https://registry.yarnpkg.com/@pooltogether/react-components/-/react-components-1.7.5.tgz#c4178d956b3df6b882c71da2e303a055c791d4b6"
-  integrity sha512-jG5l8grfv4TGmmFH+n7sPYYcMHWh0buoofI21ZAxgOJywNRx7IfmHBQfq6KRO69CguRyGRk1xyx5wUl3F26gNg==
+"@pooltogether/react-components@^1.7.6":
+  version "1.7.6"
+  resolved "https://registry.yarnpkg.com/@pooltogether/react-components/-/react-components-1.7.6.tgz#0c28067c9771f0ff0f45ae6cc8dadef221cb37df"
+  integrity sha512-dxjwjTMAEhue4FzjcBhaBVUlN4baPDroOyAsU9kliQXFOBMQbd3XbLgIiglI4unuaV3E+PHV3pNwn2cw7IHvDQ==
   dependencies:
     "@download/blockies" "^1.0.3"
     "@reach/dialog" "^0.15.0"
@@ -5644,11 +5643,6 @@ depd@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
   integrity sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
-
-deploy-eip-1820@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/deploy-eip-1820/-/deploy-eip-1820-1.0.0.tgz#59aa3de9cc8d2bcee9d7a1e5d1aff8b0f117d693"
-  integrity sha512-WQG0ANtT8/Wcq77Tva4quphOVWzwlpxvtVPUuLrbkXSuU27LMZ8tEszpelc/1nDudiuj54mVBIXbOgkCMqKOkg==
 
 des.js@^1.0.0:
   version "1.0.1"
