@@ -81,9 +81,9 @@ const ReservesList = (props) => {
   const data = useMemo(() => {
     let data = []
 
-    if (isFetched) {
+    if (isFetched && reserves) {
       data = reserves
-      data = data.filter((reserve) => !reserve.token.amountUnformatted.isZero())
+      data = data.filter((reserve) => !reserve.token?.amountUnformatted.isZero())
     }
 
     return data
