@@ -146,6 +146,7 @@ const TokensList = () => {
     }
 
     data = data.filter((balance) => !balance.amountUnformatted?.isZero())
+    data = data.sort((a, b) => Number(b.totalValueUsd) - Number(a.totalValueUsd))
 
     return data
   }, [
