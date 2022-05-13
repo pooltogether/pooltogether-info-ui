@@ -20,8 +20,10 @@ import {
 import { useAaveRewardsBalances } from 'lib/hooks/useAaveRewardsBalances'
 import { useVestingPoolBalance } from 'lib/hooks/useVestingPoolBalance'
 import { useOlympusProBondBalance } from 'lib/hooks/useOlympusProBondBalance'
+import { useTimelockAaveDaiBalance } from 'lib/hooks/useTimelockAaveDaiBalance'
 import { useTimelockTreasuryPTaUSDCBalance } from 'lib/hooks/useTimelockTreasuryPTaUSDCBalance'
 
+const aDAI_ADDRESS = '0x028171bca77440897b824ca71d1c56cac55b68a3'
 const PTaUSDC_ETHEREUM_ADDRESS = '0xdd4d117723c257cee402285d3acf218e9a8236e1'
 
 export const TokenBalancesCard = (props) => {
@@ -69,6 +71,11 @@ const TokensList = () => {
     data: ptausdcTimelockTreasuryBalance,
     isFetched: isPTaUSDCTimelockTreasuryBalanceFetched
   } = useTimelockTreasuryPTaUSDCBalance()
+
+  const {
+    data: aaveDaiTimelockBalance,
+    isFetched: isAaveDaiTimelockBalanceFetched
+  } = useTimelockAaveDaiBalance()
 
   const {
     data: aaveRewardsBalance,
@@ -124,6 +131,10 @@ const TokensList = () => {
         ...ptausdcTimelockTreasuryBalance,
         address: PTaUSDC_ETHEREUM_ADDRESS
       })
+    }
+
+    if (isAaveDaiTimelockBalanceFetched) {
+      data.push({ ...aaveDaiTimelockBalance, address: aDAI_ADDRESS })
     }
 
     if (isFetched) {

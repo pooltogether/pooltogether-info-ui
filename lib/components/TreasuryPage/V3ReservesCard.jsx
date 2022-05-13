@@ -21,14 +21,16 @@ import {
   usePrizePoolReservesTotal
 } from 'lib/hooks/usePrizePoolReserves'
 
-export const ReservesCard = (props) => {
+export const V3ReservesCard = (props) => {
   const { className } = props
 
   const { data, isFetched } = usePrizePoolReservesTotal()
 
   return (
     <Card className={className}>
-      <h6 className='font-averta text-accent-2 text-xs uppercase mt-2 mb-4'>Prize Pool Reserves</h6>
+      <h6 className='font-averta text-accent-2 text-xs uppercase mt-2 mb-4'>
+        V3 Prize Pool Reserves
+      </h6>
       <h4 className='mb-4 sm:mb-8'>
         $
         {isFetched ? (
