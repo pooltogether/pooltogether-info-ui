@@ -22,6 +22,11 @@ const GOVERNANCE_ADDRESSES: { [chainId: number]: string }[] = [
     [CHAIN_ID.polygon]: '0x8141bcfbcee654c5de17c4e2b2af26b67f9b9056',
     [CHAIN_ID.avalanche]: '0x83332f908f403ce795d90f677ce3f382fe73f3d1',
     [CHAIN_ID.optimism]: '0x722e9bfc008358ac2d445a8d892cf7b62b550f3f'
+  },
+  // Exec Team
+  {
+    [CHAIN_ID.polygon]: '0x3fee50d2888f2f7106fcdc0120295eba3ae59245',
+    [CHAIN_ID.optimism]: '0x8d352083f7094dc51cd7da8c5c0985ad6e149629'
   }
 ]
 

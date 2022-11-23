@@ -2,7 +2,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+`yarn` to install
+
+`cp .envrc.example .envrc` copy env variables and add your RPC key
+
+`direnv allow`
+
+Run the development server:
 
 ```bash
 npm run dev
