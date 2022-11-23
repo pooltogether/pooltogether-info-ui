@@ -50,8 +50,6 @@ const getTokenBalancesForChainIdsAndAddresses = async (
   tokenLists,
   addressesLists
 ) => {
-  console.log({ chainIds, readProviders, tokenLists, addressesLists })
-
   const responses = await Promise.all([
     ...chainIds.map(async (chainId) => {
       return {

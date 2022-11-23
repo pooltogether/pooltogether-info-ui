@@ -5,10 +5,11 @@ import { useTokenPrices } from '@hooks/useTokenPrices'
 import { useTokenBalance, TokenWithAllBalances } from '@pooltogether/hooks'
 import { amountMultByUsd, toScaledUsdBigNumber } from '@pooltogether/utilities'
 import { BigNumber } from 'ethers'
+import { useTokenLists } from './useTokenLists'
 
 export const useVestingPoolBalance = () => {
   const governanceChainId = useGovernanceChainId()
-  const governanceTokenAddress = CONTRACT_ADDRESSES[governanceChainId].GovernanceToken
+  const governanceTokenAddress: string = CONTRACT_ADDRESSES[governanceChainId].GovernanceToken
 
   let data: TokenWithAllBalances & {
     usd?: number
@@ -34,7 +35,7 @@ export const useVestingPoolBalance = () => {
     console.error(tokenBalanceError)
   }
 
-  const tokenLists = { [governanceChainId]: [governanceTokenAddress] }
+  const tokenLists = useTokenLists()
   const tokenPrices = useTokenPrices(tokenLists)
 
   const isFetched = tokenBalanceIsFetched

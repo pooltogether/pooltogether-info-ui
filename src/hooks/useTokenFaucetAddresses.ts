@@ -1,7 +1,5 @@
 import { prizePoolContracts } from '@pooltogether/current-pool-data'
 
-console.log({ prizePoolContracts })
-
 export function useTokenFaucetAddresses(chainIds: number[]) {
   const tokenFaucetAddresses = {}
 

@@ -1,7 +1,7 @@
 import { CONTRACT_ADDRESSES } from '@constants/legacy'
 import { CHAIN_ID } from '@pooltogether/wallet-connection'
 
-export function useTokenLists(chainIds?: string[]) {
+export function useTokenLists(chainIds?: number[]) {
   const tokenLists: { [chainId: number]: string[] } = {}
 
   if (!chainIds) {

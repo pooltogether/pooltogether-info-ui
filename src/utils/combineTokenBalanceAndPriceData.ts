@@ -41,7 +41,6 @@ export const combineTokenBalanceAndPriceData = (
     Object.keys(tokenBalances)
       .map(Number)
       .forEach((chainId) => {
-        console.log({ tokenBalances, chainId })
         const tokens = tokenBalances[chainId] || []
         tokens.forEach((token) => {
           if (!data[chainId]) {
@@ -50,8 +49,6 @@ export const combineTokenBalanceAndPriceData = (
 
           const tokenAddress = token.address.toLowerCase()
           const tokenPriceData = getTokenPriceData(chainId, tokenAddress, tokenPrices)
-
-          console.log({ tokenAddress, tokenPriceData })
 
           const usd = tokenPriceData?.usd
 

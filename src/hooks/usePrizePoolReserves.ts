@@ -11,7 +11,6 @@ import PrizePoolAbi from '@pooltogether/pooltogether-contracts/abis/PrizePool'
 import {
   addBigNumbers,
   amountMultByUsd,
-  sToMs,
   toNonScaledUsdString,
   toScaledUsdBigNumber
 } from '@pooltogether/utilities'
@@ -48,46 +47,48 @@ export const usePrizePoolReserves = () => {
     reserves.refetch()
   }
 
-  let data: {
+  const data: {
     [chainId: number]: {}[]
-  }
+  } = []
   if (isFetched) {
-    Object.keys(reserves.data).forEach((chainId) => {
-      const _reserves = reserves.data[chainId] || []
-      _reserves.forEach((reserve) => {
-        if (!data[chainId]) {
-          data[chainId] = []
-        }
+    Object.keys(reserves.data)
+      .map(Number)
+      .forEach((chainId) => {
+        const _reserves = reserves.data[chainId] || []
+        _reserves.forEach((reserve) => {
+          if (!data[chainId]) {
+            data[chainId] = []
+          }
 
-        const token = reserve.token
-        const tokenAddress = token.address.toLowerCase()
-        const tokenPriceData = tokenPrices[chainId]?.[tokenAddress] || {}
+          const token = reserve.token
+          const tokenAddress = token.address.toLowerCase()
+          const tokenPriceData = tokenPrices[chainId]?.[tokenAddress] || {}
 
-        const usd = tokenPriceData.usd
+          const usd = tokenPriceData.usd
 
-        if (!usd) {
-          data[chainId].push({
-            ...reserve,
-            chainId: Number(chainId)
-          })
-        } else {
-          const usdValueUnformatted = amountMultByUsd(token.amountUnformatted, usd)
-          const totalValueUsd = formatUnits(usdValueUnformatted, token.decimals)
-          const totalValueUsdScaled = toScaledUsdBigNumber(totalValueUsd)
+          if (!usd) {
+            data[chainId].push({
+              ...reserve,
+              chainId: Number(chainId)
+            })
+          } else {
+            const usdValueUnformatted = amountMultByUsd(token.amountUnformatted, usd)
+            const totalValueUsd = formatUnits(usdValueUnformatted, token.decimals)
+            const totalValueUsdScaled = toScaledUsdBigNumber(totalValueUsd)
 
-          data[chainId].push({
-            ...reserve,
-            chainId: Number(chainId),
-            token: {
-              ...reserve.token,
-              usd,
-              totalValueUsd,
-              totalValueUsdScaled
-            }
-          })
-        }
+            data[chainId].push({
+              ...reserve,
+              chainId: Number(chainId),
+              token: {
+                ...reserve.token,
+                usd,
+                totalValueUsd,
+                totalValueUsdScaled
+              }
+            })
+          }
+        })
       })
-    })
   }
 
   return {
@@ -130,7 +131,28 @@ export const usePrizePoolReservesTotal = () => {
   }
 }
 
-const getPrizePoolReservesForAllChainIds = async (chainIds, readProviders, prizePoolContracts) => {
+const getPrizePoolReservesForAllChainIds = async (
+  chainIds,
+  readProviders,
+  prizePoolContracts
+): Promise<{
+  [chainId: number]: {
+    prizePool: {
+      address: string
+    }
+    symbol: string
+    subgraphVersion: string
+    isCommunityPool: boolean
+    token: {
+      amount: string
+      amountUnformatted: BigNumber
+      address: string
+      decimals: number
+      name: string
+      symbol: string
+    }
+  }[]
+}> => {
   const responses = await Promise.all([
     ...chainIds.map(async (chainId) => {
       return {

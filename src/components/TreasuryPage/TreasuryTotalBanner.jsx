@@ -8,7 +8,6 @@ export const TreasuryTotalBanner = (props) => {
   const { className } = props
 
   const { data, isFetched } = useTreasuryTotal()
-  console.log({ data })
 
   return (
     <Banner className={className}>

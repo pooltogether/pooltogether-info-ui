@@ -80,8 +80,11 @@ export const getCoingeckoTokens = async () => {
   try {
     const res = await fetch('https://api.coingecko.com/api/v3/coins/list?include_platform=true')
     let coingeckoTokenList = await res.json()
+
     // Rate limited
-    if (coingeckoTokenList?.status.error_code === 429) coingeckoTokenList = COIN_LIST
+    if (coingeckoTokenList?.status?.error_code === 429) {
+      coingeckoTokenList = COIN_LIST
+    }
 
     const tokens = Object.keys(TOKENS)
       .map(Number)
@@ -100,6 +103,7 @@ export const getCoingeckoTokens = async () => {
 
     return tokens.map((token) => ({ ...token, price: priceData[token.id] })).filter(Boolean)
   } catch (e) {
+    console.log(e)
     return null
   }
 }
