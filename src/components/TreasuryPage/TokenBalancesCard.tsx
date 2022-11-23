@@ -1,3 +1,14 @@
+import { LoadingRows } from '@components/LoadingRows'
+import { CONTRACT_ADDRESSES } from '@constants/legacy'
+import { useAaveRewardsBalances } from '@hooks/useAaveRewardsBalances'
+import {
+  useGovernanceTokenBalancesTotal,
+  useGovernanceTokenBalancesFlattened
+} from '@hooks/useGovernanceTokenBalances'
+import { useOlympusProBondBalance } from '@hooks/useOlympusProBondBalance'
+import { useTimelockAaveDaiBalance } from '@hooks/useTimelockAaveDaiBalance'
+import { useTimelockTreasuryPTaUSDCBalance } from '@hooks/useTimelockTreasuryPTaUSDCBalance'
+import { useVestingPoolBalance } from '@hooks/useVestingPoolBalance'
 import { useCoingeckoTokenPrices } from '@pooltogether/hooks'
 import {
   BasicTable,
@@ -11,17 +22,6 @@ import { BlockExplorerLink } from '@pooltogether/wallet-connection'
 import FeatherIcon from 'feather-icons-react'
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
-import { LoadingRows } from '@components/LoadingRows'
-import { CONTRACT_ADDRESSES } from '@constants/legacy'
-import { useAaveRewardsBalances } from '@hooks/useAaveRewardsBalances'
-import {
-  useGovernanceTokenBalancesTotal,
-  useGovernanceTokenBalancesFlattened
-} from '@hooks/useGovernanceTokenBalances'
-import { useOlympusProBondBalance } from '@hooks/useOlympusProBondBalance'
-import { useTimelockAaveDaiBalance } from '@hooks/useTimelockAaveDaiBalance'
-import { useTimelockTreasuryPTaUSDCBalance } from '@hooks/useTimelockTreasuryPTaUSDCBalance'
-import { useVestingPoolBalance } from '@hooks/useVestingPoolBalance'
 
 const aDAI_ADDRESS = '0x028171bca77440897b824ca71d1c56cac55b68a3'
 const PTaUSDC_ETHEREUM_ADDRESS = '0xdd4d117723c257cee402285d3acf218e9a8236e1'

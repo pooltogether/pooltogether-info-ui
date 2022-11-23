@@ -1,3 +1,8 @@
+import { LoadingRows } from '@components/LoadingRows'
+import {
+  usePrizePoolReservesFlattened,
+  usePrizePoolReservesTotal
+} from '@hooks/usePrizePoolReserves'
 import {
   BasicTable,
   Card,
@@ -15,11 +20,6 @@ import {
 import { BlockExplorerLink } from '@pooltogether/wallet-connection'
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
-import { LoadingRows } from '@components/LoadingRows'
-import {
-  usePrizePoolReservesFlattened,
-  usePrizePoolReservesTotal
-} from '@hooks/usePrizePoolReserves'
 
 export const V3ReservesCard = (props) => {
   const { className } = props

@@ -1,3 +1,4 @@
+import { RPC_URLS } from '@constants/rpc'
 import { initRpcUrls } from '@pooltogether/wallet-connection'
 import { Provider as JotaiProvider } from 'jotai'
 import { ThemeProvider } from 'next-themes'
@@ -7,7 +8,6 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import '@styles/index.css'
 import '@pooltogether/react-components/dist/globals.css'
 import 'react-spring-bottom-sheet/dist/style.css'
-import { RPC_URLS } from '@constants/rpc'
 
 // Initialize react-query Query Client
 const queryClient = new QueryClient({

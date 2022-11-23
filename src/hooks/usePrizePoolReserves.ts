@@ -1,5 +1,7 @@
+// @ts-nocheck
 import ERC20Abi from '@abis/ERC20Abi'
 import { QUERY_KEYS } from '@constants/legacy'
+import { RPC_URLS } from '@constants/rpc'
 import { formatUnits } from '@ethersproject/units'
 import { usePrizePoolContracts } from '@hooks/usePrizePoolContracts'
 import { useTokenLists } from '@hooks/useTokenLists'
@@ -15,7 +17,6 @@ import {
 } from '@pooltogether/utilities'
 import { getReadProviders, CHAIN_ID } from '@pooltogether/wallet-connection'
 import { useQuery } from 'react-query'
-import { RPC_URLS } from '../constants/rpc'
 
 const useGetPrizePoolReserves = (chainIds, providers, prizePoolContracts) => {
   const enabled = Boolean(chainIds)
@@ -47,7 +48,9 @@ export const usePrizePoolReserves = () => {
     reserves.refetch()
   }
 
-  let data = {}
+  let data: {
+    [chainId: number]: {}[]
+  }
   if (isFetched) {
     Object.keys(reserves.data).forEach((chainId) => {
       const _reserves = reserves.data[chainId] || []

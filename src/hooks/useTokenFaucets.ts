@@ -1,12 +1,13 @@
+// @ts-nocheck
+import ERC20Abi from '@abis/ERC20Abi'
+import TokenFaucetAbi from '@abis/TokenFaucetAbi'
+import { QUERY_KEYS, SECONDS_PER_DAY } from '@constants/legacy'
 import { formatUnits } from '@ethersproject/units'
+import { useTokenFaucetAddresses } from '@hooks/useTokenFaucetAddresses'
 import { contract, batch } from '@pooltogether/etherplex'
 import { sToMs } from '@pooltogether/utilities'
 import { getReadProviders } from '@pooltogether/wallet-connection'
 import { useQuery } from 'react-query'
-import ERC20Abi from '@abis/ERC20Abi'
-import TokenFaucetAbi from '@abis/TokenFaucetAbi'
-import { QUERY_KEYS, SECONDS_PER_DAY } from '@constants/legacy'
-import { useTokenFaucetAddresses } from '@hooks/useTokenFaucetAddresses'
 import { RPC_URLS } from '../constants/rpc'
 
 export const useTokenFaucets = (chainId) => {

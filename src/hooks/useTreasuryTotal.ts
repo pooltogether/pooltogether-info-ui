@@ -1,8 +1,8 @@
-import { addBigNumbers, toNonScaledUsdString } from '@pooltogether/utilities'
 import {
   useGovernanceTokenBalances,
   useGovernanceTokenBalancesTotal
 } from '@hooks/useGovernanceTokenBalances'
+import { addBigNumbers, toNonScaledUsdString } from '@pooltogether/utilities'
 
 export const useTreasuryTotal = () => {
   const { isFetched: timelockAddressesLists } = useGovernanceTokenBalances()

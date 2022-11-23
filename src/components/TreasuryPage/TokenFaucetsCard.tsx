@@ -1,3 +1,6 @@
+import { LoadingRows } from '@components/LoadingRows'
+import { DISCORD_INVITE_URL, POOLTOGETHER_GOV_FORUM_URL } from '@constants/legacy'
+import { useTokenFaucets } from '@hooks/useTokenFaucets'
 import {
   BasicTable,
   Card,
@@ -12,9 +15,6 @@ import { formatNumberForDisplay } from '@pooltogether/utilities'
 import { BlockExplorerLink, CHAIN_ID } from '@pooltogether/wallet-connection'
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
-import { LoadingRows } from '@components/LoadingRows'
-import { DISCORD_INVITE_URL, POOLTOGETHER_GOV_FORUM_URL } from '@constants/legacy'
-import { useTokenFaucets } from '@hooks/useTokenFaucets'
 
 export const TokenFaucetsCard = (props) => {
   const { className } = props

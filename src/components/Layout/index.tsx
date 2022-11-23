@@ -1,6 +1,6 @@
+import { PageHeader } from '@components/Layout/PageHeader'
 import classNames from 'classnames'
 import React from 'react'
-import { PageHeader } from '@components/Layout/PageHeader'
 import { Footer } from './Footer'
 import { Navigation } from './Navigation'
 import { PagePadding } from './PagePadding'

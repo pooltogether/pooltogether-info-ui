@@ -1,17 +1,15 @@
-import { useQuery } from 'react-query'
-import { contract, batch } from '@pooltogether/etherplex'
-import { formatUnits } from '@ethersproject/units'
-import { sToMs } from '@pooltogether/utilities'
-import { CHAIN_ID } from '@pooltogether/wallet-connection'
-
 import AaveRewardsAbi from '@abis/AaveRewardsAbi'
 import ERC20Abi from '@abis/ERC20Abi'
 import { QUERY_KEYS } from '@constants/legacy'
+import { formatUnits } from '@ethersproject/units'
 import { useAaveRewardsContractsLists } from '@hooks/useAaveRewardsContractsLists'
 import { useTokenLists } from '@hooks/useTokenLists'
 import { useTokenPrices } from '@hooks/useTokenPrices'
-import { combineTokenBalanceAndPriceData } from '@utils/combineTokenBalanceAndPriceData'
+import { contract, batch } from '@pooltogether/etherplex'
+import { CHAIN_ID } from '@pooltogether/wallet-connection'
 import { getReadProviders } from '@pooltogether/wallet-connection'
+import { combineTokenBalanceAndPriceData } from '@utils/combineTokenBalanceAndPriceData'
+import { useQuery } from 'react-query'
 import { RPC_URLS } from '../constants/rpc'
 
 const POOL_YIELD_SOURCE_CONTRACTS = {
@@ -30,11 +28,6 @@ export const useAaveRewardsBalances = () => {
 
   const tokenLists = useTokenLists()
   const tokenPrices = useTokenPrices(tokenLists)
-  if (tokenPrices.error) {
-    console.warn(tokenPrices.error)
-  }
-
-  const enabled = tokenPrices.isFetched
 
   return useQuery(
     [QUERY_KEYS.getAaveRewardsBalances, chainIds, addressesLists],
@@ -47,7 +40,6 @@ export const useAaveRewardsBalances = () => {
         tokenPrices
       ),
     {
-      enabled,
       refetchOnMount: false,
       refetchOnWindowFocus: false
     }

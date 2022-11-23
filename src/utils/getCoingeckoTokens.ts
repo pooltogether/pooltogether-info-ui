@@ -78,13 +78,10 @@ export interface CoingeckoToken {
 
 export const getCoingeckoTokens = async () => {
   try {
-    // const res = await fetch('https://api.coingecko.com/api/v3/coins/list?include_platform=true')
-    // let coingeckoTokenList = await res.json()
+    const res = await fetch('https://api.coingecko.com/api/v3/coins/list?include_platform=true')
+    let coingeckoTokenList = await res.json()
     // Rate limited
-    // if (coingeckoTokenList?.status.error_code === 429) coingeckoTokenList = COIN_LIST
-
-    // TODO: TEMPORARY HARDCODED LIST
-    const coingeckoTokenList = COIN_LIST
+    if (coingeckoTokenList?.status.error_code === 429) coingeckoTokenList = COIN_LIST
 
     const tokens = Object.keys(TOKENS)
       .map(Number)

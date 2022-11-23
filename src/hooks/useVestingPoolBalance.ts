@@ -1,15 +1,24 @@
-import { formatUnits } from '@ethersproject/units'
-import { useTokenBalance } from '@pooltogether/hooks'
-import { amountMultByUsd, toScaledUsdBigNumber } from '@pooltogether/utilities'
 import { CONTRACT_ADDRESSES } from '@constants/legacy'
+import { formatUnits } from '@ethersproject/units'
 import { useGovernanceChainId } from '@hooks/useGovernanceChainId'
 import { useTokenPrices } from '@hooks/useTokenPrices'
+import { useTokenBalance, TokenWithAllBalances } from '@pooltogether/hooks'
+import { amountMultByUsd, toScaledUsdBigNumber } from '@pooltogether/utilities'
+import { BigNumber } from 'ethers'
 
 export const useVestingPoolBalance = () => {
   const governanceChainId = useGovernanceChainId()
   const governanceTokenAddress = CONTRACT_ADDRESSES[governanceChainId].GovernanceToken
 
-  let data = {}
+  let data: TokenWithAllBalances & {
+    usd?: number
+    usdValueUnformatted?: BigNumber
+    totalValueUsd?: string
+    totalValueUsdScaled?: BigNumber
+    address?: string
+    chainId?: number
+    isVesting?: boolean
+  }
 
   let {
     data: tokenBalance,
