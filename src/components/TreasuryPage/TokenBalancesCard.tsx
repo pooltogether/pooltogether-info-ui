@@ -191,7 +191,7 @@ const UsdAmount = (props) => {
   const { totalValueUsd } = props
   return (
     <span className='flex justify-end'>
-      <span>{formatCurrencyNumberForDisplay(totalValueUsd)}</span>
+      <span>{isNaN(totalValueUsd) ? '-' : formatCurrencyNumberForDisplay(totalValueUsd)}</span>
     </span>
   )
 }

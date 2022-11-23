@@ -56,7 +56,8 @@ export const TOKENS = {
     '0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0' // MATIC
   ],
   [CHAIN_ID.polygon]: [
-    '0xc2132d05d31c914a87c6611c10748aeb04b58e8f' // POS USDT
+    '0xc2132d05d31c914a87c6611c10748aeb04b58e8f', // POS USDT
+    '0x6847d3a4c80a82e1fb26f1fc6f09f3ad5beb5222' // C4Arena
   ],
   [CHAIN_ID.avalanche]: [
     '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7' // wAVAX

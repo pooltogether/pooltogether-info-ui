@@ -38,18 +38,22 @@ const TOKEN_LISTS: Readonly<{
     '0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0', // MATIC
     '0xdd4d117723c257cee402285d3acf218e9a8236e1', // PTaUSDC
     '0x028171bca77440897b824ca71d1c56cac55b68a3', // aDAI
-    '0x93567d6b6553bde2b652fb7f197a229b93813d3f' // AVAX
+    '0x93567d6b6553bde2b652fb7f197a229b93813d3f', // AVAX
+    '0x4da27a545c0c5b758a6ba100e3a049001de870f5' // stkAave
   ],
   [CHAIN_ID.polygon]: [
     '0xc2132d05d31c914a87c6611c10748aeb04b58e8f', // POS USDT
-    '0x6a304dFdb9f808741244b6bfEe65ca7B3b3A6076' // PTaUSDC
+    '0x6a304dFdb9f808741244b6bfEe65ca7B3b3A6076', // PTaUSDC
+    '0x3a58a54c066fdc0f2d55fc9c89f0415c92ebf3c4', // stMATIC
+    '0x6847d3a4c80a82e1fb26f1fc6f09f3ad5beb5222' // C4Arena
   ],
   [CHAIN_ID.avalanche]: [
     '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7', // wAVAX
     '0xb27f379c050f6ed0973a01667458af6ecebc1d90' // PTaUSDC
   ],
   [CHAIN_ID.optimism]: [
-    '0x62bb4fc73094c83b5e952c2180b23fa7054954c4' // PTaUSDC
+    '0x62bb4fc73094c83b5e952c2180b23fa7054954c4', // PTaUSDC
+    '0x4200000000000000000000000000000000000042' // OP
   ]
 })
 
@@ -74,6 +78,11 @@ export const TOKEN_PRICE_ALIASES = {
     '0x391a437196c81eea7bbbbd5ed4df6b49de4f5c96': {
       chainId: CHAIN_ID.mainnet,
       address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48' // USDC
+    },
+    // stkAave
+    '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9': {
+      chainId: CHAIN_ID.mainnet,
+      address: '0x4da27a545c0c5b758a6ba100e3a049001de870f5' // USDC
     }
   },
   [CHAIN_ID.polygon]: {
@@ -91,6 +100,10 @@ export const TOKEN_PRICE_ALIASES = {
     '0x6a304dfdb9f808741244b6bfee65ca7b3b3a6076': {
       chainId: CHAIN_ID.mainnet,
       address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48' // USDC
+    },
+    '0x3a58a54c066fdc0f2d55fc9c89f0415c92ebf3c4': {
+      chainId: CHAIN_ID.mainnet,
+      address: '0x9ee91f9f426fa633d227f7a9b000e28b9dfd8599' // stMATIC
     }
   },
   [CHAIN_ID.avalanche]: {
