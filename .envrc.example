@@ -1,8 +1,5 @@
 export NEXT_PUBLIC_PT_ENV=dev
 
-# Blank if development. Domain if production.
-export NEXT_PUBLIC_DOMAIN_NAME=
-
 # RPC URLs to use. Provided URLs will take precedence in the app.
 # Ethereum
 export NEXT_PUBLIC_ETHEREUM_MAINNET_RPC_URL=https://mainnet.infura.io/v3/
