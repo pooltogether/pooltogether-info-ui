@@ -39,7 +39,9 @@ const TOKEN_LISTS: Readonly<{
     '0xdd4d117723c257cee402285d3acf218e9a8236e1', // PTaUSDC
     '0x028171bca77440897b824ca71d1c56cac55b68a3', // aDAI
     '0x93567d6b6553bde2b652fb7f197a229b93813d3f', // AVAX
-    '0x4da27a545c0c5b758a6ba100e3a049001de870f5' // stkAave
+    '0x4da27a545c0c5b758a6ba100e3a049001de870f5', // stkAave
+    '0xae7ab96520de3a18e5e111b5eaab095312d7fe84', // stETH
+    '0xd5f60154bef3564ebfbe9bb236595f0da548a742' // SPETHWIN
   ],
   [CHAIN_ID.polygon]: [
     '0xc2132d05d31c914a87c6611c10748aeb04b58e8f', // POS USDT
@@ -79,10 +81,10 @@ export const TOKEN_PRICE_ALIASES = {
       chainId: CHAIN_ID.mainnet,
       address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48' // USDC
     },
-    // stkAave
-    '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9': {
+    // SPETHWIN
+    '0xd5f60154bef3564ebfbe9bb236595f0da548a742': {
       chainId: CHAIN_ID.mainnet,
-      address: '0x4da27a545c0c5b758a6ba100e3a049001de870f5' // USDC
+      address: '0xae7ab96520de3a18e5e111b5eaab095312d7fe84' // stETH
     }
   },
   [CHAIN_ID.polygon]: {
@@ -101,9 +103,10 @@ export const TOKEN_PRICE_ALIASES = {
       chainId: CHAIN_ID.mainnet,
       address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48' // USDC
     },
+    // stMATIC
     '0x3a58a54c066fdc0f2d55fc9c89f0415c92ebf3c4': {
       chainId: CHAIN_ID.mainnet,
-      address: '0x9ee91f9f426fa633d227f7a9b000e28b9dfd8599' // stMATIC
+      address: '0x9ee91f9f426fa633d227f7a9b000e28b9dfd8599' // MATIC
     }
   },
   [CHAIN_ID.avalanche]: {
