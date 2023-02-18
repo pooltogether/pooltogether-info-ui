@@ -41,7 +41,7 @@ export const useVestingPoolBalance = () => {
   const isFetched = tokenBalanceIsFetched
 
   if (isFetched && tokenPrices && tokenBalance) {
-    const usd = tokenPrices[governanceChainId][governanceTokenAddress].usd
+    const usd = tokenPrices[governanceChainId][governanceTokenAddress]?.usd ?? 0
     const usdValueUnformatted = amountMultByUsd(tokenBalance.amountUnformatted, usd)
     const totalValueUsd = formatUnits(usdValueUnformatted, tokenBalance.decimals)
     const totalValueUsdScaled = toScaledUsdBigNumber(totalValueUsd)
