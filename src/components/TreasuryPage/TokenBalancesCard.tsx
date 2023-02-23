@@ -1,13 +1,10 @@
 import { LoadingRows } from '@components/LoadingRows'
 import { CONTRACT_ADDRESSES } from '@constants/legacy'
-import { useAaveRewardsBalances } from '@hooks/useAaveRewardsBalances'
+import { useDelegationBalances } from '@hooks/useDelegationBalances'
 import {
   useGovernanceTokenBalancesTotal,
   useGovernanceTokenBalancesFlattened
 } from '@hooks/useGovernanceTokenBalances'
-import { useOlympusProBondBalance } from '@hooks/useOlympusProBondBalance'
-import { useTimelockAaveDaiBalance } from '@hooks/useTimelockAaveDaiBalance'
-import { useTimelockTreasuryPTaUSDCBalance } from '@hooks/useTimelockTreasuryPTaUSDCBalance'
 import { useVestingPoolBalance } from '@hooks/useVestingPoolBalance'
 import { useCoingeckoTokenPrices } from '@pooltogether/hooks'
 import {
@@ -22,9 +19,6 @@ import { BlockExplorerLink } from '@pooltogether/wallet-connection'
 import FeatherIcon from 'feather-icons-react'
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
-
-const aDAI_ADDRESS = '0x028171bca77440897b824ca71d1c56cac55b68a3'
-const PTaUSDC_ETHEREUM_ADDRESS = '0xdd4d117723c257cee402285d3acf218e9a8236e1'
 
 export const TokenBalancesCard = (props) => {
   const { className } = props
@@ -58,7 +52,8 @@ const TokensList = () => {
   const { data: vestingPoolBalance, isFetched: isVestingPoolBalanceFetched } =
     useVestingPoolBalance()
 
-  const { data: bondBalance, isFetched: isBondBalanceFetched } = useOlympusProBondBalance()
+  const { data: delegationBalances, isFetched: isDelegationBalancesFetched } =
+    useDelegationBalances()
 
   const screenSize = useScreenSize()
 
@@ -100,8 +95,8 @@ const TokensList = () => {
       data.push(vestingPoolBalance)
     }
 
-    if (isBondBalanceFetched) {
-      data.push(bondBalance)
+    if (isDelegationBalancesFetched) {
+      data.push(delegationBalances)
     }
 
     if (isFetched) {
@@ -115,8 +110,8 @@ const TokensList = () => {
   }, [
     vestingPoolBalance,
     isVestingPoolBalanceFetched,
-    isBondBalanceFetched,
-    bondBalance,
+    delegationBalances,
+    isDelegationBalancesFetched,
     tokenBalances,
     isFetched
   ])
@@ -141,13 +136,30 @@ const Symbol = (props: {
   symbol: string
   chainId: number
   address: string
-  isVesting: boolean
+  isVesting?: boolean
+  isDelegating?: boolean
 }) => {
-  const { symbol, chainId, address, isVesting } = props
+  const { symbol, chainId, address, isVesting, isDelegating } = props
 
   return (
     <span className='flex my-2'>
-      <TokenIcon chainId={chainId} address={address} className='mr-2 sm:mr-4 my-auto' />
+      {isDelegating ? (
+        <TokenIcon
+          chainId={1}
+          address={'0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'}
+          className='mr-2 sm:mr-4 my-auto'
+        />
+      ) : (
+        <TokenIcon
+          chainId={chainId}
+          address={
+            address === '0xd5f60154bef3564ebfbe9bb236595f0da548a742'
+              ? '0xae7ab96520de3a18e5e111b5eaab095312d7fe84'
+              : address
+          }
+          className='mr-2 sm:mr-4 my-auto'
+        />
+      )}
       {isVesting ? (
         <>
           <BlockExplorerLink chainId={chainId} address={CONTRACT_ADDRESSES[chainId].TreasuryVester}>
@@ -156,6 +168,8 @@ const Symbol = (props: {
             <span className='font-bold'>{symbol}</span>
           </BlockExplorerLink>
         </>
+      ) : isDelegating ? (
+        <span className='mr-1 font-bold'>Delegating</span>
       ) : (
         <BlockExplorerLink chainId={chainId} address={address}>
           <span className='font-bold'>{symbol}</span>
