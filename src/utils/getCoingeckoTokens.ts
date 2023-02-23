@@ -62,6 +62,9 @@ export const TOKENS = {
   ],
   [CHAIN_ID.avalanche]: [
     '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7' // wAVAX
+  ],
+  [CHAIN_ID.optimism]: [
+    '0x4200000000000000000000000000000000000042' // OP
   ]
 }
 

@@ -4,9 +4,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 `yarn` to install
 
-`cp .envrc.example .envrc` copy env variables and add your RPC key
-
 `direnv allow`
+
+`cp .envrc.example .envrc` copy env variables and add your RPC key
 
 Run the development server:
 

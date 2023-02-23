@@ -106,7 +106,7 @@ export const TOKEN_PRICE_ALIASES = {
     // stMATIC
     '0x3a58a54c066fdc0f2d55fc9c89f0415c92ebf3c4': {
       chainId: CHAIN_ID.mainnet,
-      address: '0x9ee91f9f426fa633d227f7a9b000e28b9dfd8599' // MATIC
+      address: '0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0' // MATIC
     }
   },
   [CHAIN_ID.avalanche]: {
