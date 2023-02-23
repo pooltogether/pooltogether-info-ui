@@ -1,11 +1,10 @@
 import { LoadingRows } from '@components/LoadingRows'
 import { CONTRACT_ADDRESSES } from '@constants/legacy'
-
+import { useDelegationBalances } from '@hooks/useDelegationBalances'
 import {
   useGovernanceTokenBalancesTotal,
   useGovernanceTokenBalancesFlattened
 } from '@hooks/useGovernanceTokenBalances'
-import { useDelegationBalances } from '@hooks/useDelegationBalances'
 import { useVestingPoolBalance } from '@hooks/useVestingPoolBalance'
 import { useCoingeckoTokenPrices } from '@pooltogether/hooks'
 import {

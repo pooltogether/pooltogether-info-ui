@@ -1,11 +1,11 @@
-import { useTokenBalance } from '@pooltogether/hooks'
-import { TWAB_DELEGATOR_ADDRESS } from '../constants/legacy'
 import { formatUnits } from '@ethersproject/units'
 import { useTotalAmountDelegated } from '@hooks/useTotalAmountDelegated'
+import { useTokenBalance } from '@pooltogether/hooks'
 import { amountMultByUsd, toScaledUsdBigNumber } from '@pooltogether/utilities'
-import { BigNumber } from 'ethers'
 import { numberWithCommas } from '@pooltogether/utilities'
 import { CHAIN_ID } from '@pooltogether/wallet-connection'
+import { BigNumber } from 'ethers'
+import { TWAB_DELEGATOR_ADDRESS } from '../constants/legacy'
 
 const getTwabDelegatorContractAddress = (chainId: number) => TWAB_DELEGATOR_ADDRESS[chainId]
 
