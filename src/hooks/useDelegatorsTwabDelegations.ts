@@ -22,14 +22,14 @@ interface DelegationId {
   slot: BigNumber
 }
 
-interface DelegationUpdate extends DelegationId {
-  delegatee: string
-  lockDuration: number
-}
+// interface DelegationUpdate extends DelegationId {
+//   delegatee: string
+//   lockDuration: number
+// }
 
-interface DelegationFund extends DelegationId {
-  amount: BigNumber
-}
+// interface DelegationFund extends DelegationId {
+//   amount: BigNumber
+// }
 
 /**
  *

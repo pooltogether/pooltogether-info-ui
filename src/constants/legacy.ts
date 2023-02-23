@@ -1,4 +1,4 @@
-import { BlockExplorerLink, CHAIN_ID } from '@pooltogether/wallet-connection'
+import { CHAIN_ID } from '@pooltogether/wallet-connection'
 
 export const SUPPORTED_CHAIN_IDS = [1, 4, 31337, 1234]
 

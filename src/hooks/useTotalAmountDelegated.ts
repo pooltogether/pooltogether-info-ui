@@ -5,7 +5,7 @@ import { formatUnits } from 'ethers/lib/utils'
 import { useDelegatorsTwabDelegations } from './useDelegatorsTwabDelegations'
 
 export const useTotalAmountDelegated = (chainId: number, delegator: string) => {
-  //   const ticket = useV4Ticket(chainId)
+  // const ticket = useV4Ticket(chainId)
 
   const {
     data: delegations,
@@ -34,7 +34,7 @@ export const useTotalAmountDelegated = (chainId: number, delegator: string) => {
     data: {
       amount,
       amountUnformatted,
-      amountPretty: numberWithCommas(amount) as string
+      amountPretty: numberWithCommas(amount)
     },
     isFetched: isDelegationsFetched,
     refetch
