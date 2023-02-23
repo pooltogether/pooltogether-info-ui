@@ -1,3 +1,5 @@
+import { BlockExplorerLink, CHAIN_ID } from '@pooltogether/wallet-connection'
+
 export const SUPPORTED_CHAIN_IDS = [1, 4, 31337, 1234]
 
 export const SECONDS_PER_BLOCK = 13
@@ -101,3 +103,15 @@ export const UNISWAP_GRAPH_URIS = {
   4: 'https://api.thegraph.com/subgraphs/name/blockrockettech/uniswap-v2-subgraph-rinkeby',
   137: 'https://api.thegraph.com/subgraphs/name/sameepsi/quickswap'
 }
+
+export const TWAB_DELEGATOR_ADDRESS: { [chainId: number]: string } = Object.freeze({
+  [CHAIN_ID.optimism]: '0x469C6F4c1AdA45EB2E251685aC2bf05aEd591E70',
+  [CHAIN_ID.polygon]: '0x89Ee77Ce3F4C1b0346FF96E3004ff7C9f972dEF8',
+  [CHAIN_ID.mainnet]: '0x5cFbEE38362B9A60be276763753f64245EA990F7',
+  [CHAIN_ID.avalanche]: '0xd23723fef8A16B77eaDc1fC822aE4170bA9d4009',
+  [CHAIN_ID['optimism-kovan']]: '0xDDbd5eab2011a2240F69FD1255246922931C66A6',
+  [CHAIN_ID['optimism-goerli']]: '0x6176776490147b41813C1a0e342080d2CAA4e618',
+  [CHAIN_ID.mumbai]: '0xaAc4688AB7AD2c0CbC51E9674D53Bf394910aF6a',
+  [CHAIN_ID.rinkeby]: '0x448200d83e48f561B42e90274566d3FA3914B8A4',
+  [CHAIN_ID.fuji]: '0xdB4B551C21860028c4CA951CC7067699eB7c5Bfe'
+})

@@ -1,6 +1,6 @@
 import { CONTRACT_ADDRESSES } from '@constants/legacy'
 import { useAaveRewardsBalances } from '@hooks/useAaveRewardsBalances'
-import { useOlympusProBondBalance } from '@hooks/useOlympusProBondBalance'
+// import { useOlympusProBondBalance } from '@hooks/useOlympusProBondBalance'
 import { useVestingPoolBalance } from '@hooks/useVestingPoolBalance'
 import { addBigNumbers, toNonScaledUsdString } from '@pooltogether/utilities'
 import { CHAIN_ID } from '@pooltogether/wallet-connection'
@@ -150,7 +150,7 @@ export const useGovernanceTokenBalancesTotal = () => {
     useGovernanceTokenBalancesFlattened()
   const { data: vestingPoolBalance, isFetched: isVestingPoolBalanceFetched } =
     useVestingPoolBalance()
-  const { data: bondBalance, isFetched: isBondBalanceFetched } = useOlympusProBondBalance()
+  // const { data: bondBalance, isFetched: isBondBalanceFetched } = useOlympusProBondBalance()
   const { data: aaveRewardsBalances, isFetched: isAaveRewardsBalancesFetched } =
     useAaveRewardsBalances()
 
@@ -159,8 +159,8 @@ export const useGovernanceTokenBalancesTotal = () => {
     isVestingPoolBalanceFetched &&
     vestingPoolBalance?.totalValueUsdScaled &&
     governanceTokenBalancesFlattened &&
-    isAaveRewardsBalancesFetched &&
-    isBondBalanceFetched
+    isAaveRewardsBalancesFetched
+  // isBondBalanceFetched
 
   if (!isFetched) {
     return {
@@ -177,7 +177,7 @@ export const useGovernanceTokenBalancesTotal = () => {
       .map((balance) => balance.totalValueUsdScaled)
       .filter(Boolean),
     vestingPoolBalance.totalValueUsdScaled,
-    bondBalance.totalValueUsdScaled,
+    // bondBalance.totalValueUsdScaled,
     aaveRewardsTotalValueUsdScaled(aaveRewardsBalances)
   ])
 
