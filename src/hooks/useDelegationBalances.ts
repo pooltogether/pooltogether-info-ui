@@ -18,6 +18,7 @@ interface delegationReturn {
   amount?: string
   amountPretty?: string
   amountUnformatted?: BigNumber
+  totalValueUsdScaled: BigNumber
 }
 
 export const useDelegationBalances = () => {
@@ -57,11 +58,11 @@ export const useDelegationBalances = () => {
     const usdValueUnformatted = amountMultByUsd(balancePlusStakedamountUnformatted, 1)
     const totalValueUsd = formatUnits(balancePlusStakedamountUnformatted, 6)
     const totalValueUsdScaled = toScaledUsdBigNumber(totalValueUsd)
-
     const delegationBalancesTotal: delegationReturn = {
       amount: amount.toString(),
       amountPretty: numberWithCommas(amount),
-      amountUnformatted: balancePlusStakedamountUnformatted
+      amountUnformatted: balancePlusStakedamountUnformatted,
+      totalValueUsdScaled: totalValueUsdScaled
     }
     data = {
       ...delegationBalancesTotal,
@@ -77,7 +78,6 @@ export const useDelegationBalances = () => {
       symbol: 'USDC'
     }
   }
-
   return {
     isFetched,
     data,

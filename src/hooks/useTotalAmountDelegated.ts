@@ -34,6 +34,7 @@ export const useTotalAmountDelegated = (chainId: number, delegator: string) => {
     data: {
       amount,
       amountUnformatted,
+
       amountPretty: numberWithCommas(amount)
     },
     isFetched: isDelegationsFetched,

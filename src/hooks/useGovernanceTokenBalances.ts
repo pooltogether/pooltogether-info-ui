@@ -24,6 +24,7 @@ const GOVERNANCE_ADDRESSES: { [chainId: number]: string }[] = [
   },
   // Exec Team
   {
+    [CHAIN_ID.mainnet]: '0xda63d70332139e6a8eca7513f4b6e2e0dc93b693',
     [CHAIN_ID.polygon]: '0x3fee50d2888f2f7106fcdc0120295eba3ae59245',
     [CHAIN_ID.optimism]: '0x8d352083f7094dc51cd7da8c5c0985ad6e149629'
   }
