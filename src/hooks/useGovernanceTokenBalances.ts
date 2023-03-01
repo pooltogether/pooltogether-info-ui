@@ -5,10 +5,10 @@ import { addBigNumbers, toNonScaledUsdString } from '@pooltogether/utilities'
 import { CHAIN_ID } from '@pooltogether/wallet-connection'
 import { BigNumber } from 'ethers'
 import { combineTokenBalanceAndPriceData } from '../utils/combineTokenBalanceAndPriceData'
+import { useDelegationBalances } from './useDelegationBalances'
 import { useAllTokenBalances } from './useTokenBalances'
 import { useTokenLists } from './useTokenLists'
 import { useTokenPrices } from './useTokenPrices'
-import { useDelegationBalances } from './useDelegationBalances'
 
 // The Governance owned addresses to query balances for
 const GOVERNANCE_ADDRESSES: { [chainId: number]: string }[] = [
