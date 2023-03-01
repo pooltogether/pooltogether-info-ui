@@ -8,6 +8,7 @@ import { combineTokenBalanceAndPriceData } from '../utils/combineTokenBalanceAnd
 import { useAllTokenBalances } from './useTokenBalances'
 import { useTokenLists } from './useTokenLists'
 import { useTokenPrices } from './useTokenPrices'
+import { useDelegationBalances } from './useDelegationBalances'
 
 // The Governance owned addresses to query balances for
 const GOVERNANCE_ADDRESSES: { [chainId: number]: string }[] = [
@@ -152,13 +153,17 @@ export const useGovernanceTokenBalancesTotal = () => {
     useVestingPoolBalance()
   const { data: aaveRewardsBalances, isFetched: isAaveRewardsBalancesFetched } =
     useAaveRewardsBalances()
+  const { data: delegationBalances, isFetched: isDelegationBalancesFetched } =
+    useDelegationBalances()
 
   const isFetched =
     isGovernanceTokenBalancesFetched &&
     isVestingPoolBalanceFetched &&
     vestingPoolBalance?.totalValueUsdScaled &&
     governanceTokenBalancesFlattened &&
-    isAaveRewardsBalancesFetched
+    isAaveRewardsBalancesFetched &&
+    isDelegationBalancesFetched &&
+    delegationBalances.totalValueUsdScaled
 
   if (!isFetched) {
     return {
@@ -175,7 +180,8 @@ export const useGovernanceTokenBalancesTotal = () => {
       .map((balance) => balance.totalValueUsdScaled)
       .filter(Boolean),
     vestingPoolBalance.totalValueUsdScaled,
-    aaveRewardsTotalValueUsdScaled(aaveRewardsBalances)
+    aaveRewardsTotalValueUsdScaled(aaveRewardsBalances),
+    delegationBalances.totalValueUsdScaled
   ])
 
   const totalValueUsd = toNonScaledUsdString(totalValueUsdScaled)
