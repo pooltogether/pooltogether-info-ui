@@ -31,11 +31,7 @@ export const useTotalAmountDelegated = (chainId: number, delegator: string) => {
   // hard-coded decimals for now
   const amount = formatUnits(amountUnformatted, 6)
   return {
-    data: {
-      amount,
-      amountUnformatted,
-      amountPretty: numberWithCommas(amount)
-    },
+    data: { amount, amountUnformatted, amountPretty: numberWithCommas(amount) },
     isFetched: isDelegationsFetched,
     refetch
   }
