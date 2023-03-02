@@ -104,6 +104,8 @@ const TokensList = () => {
     }
 
     data = data.filter((balance) => !balance.amountUnformatted?.isZero())
+    // don't show dusty tokens except ARENA
+    data = data.filter((balance) => balance.symbol === 'ARENA' || balance.totalValueUsd > 5)
     data = data.sort((a, b) => Number(b.totalValueUsd) - Number(a.totalValueUsd))
 
     return data
