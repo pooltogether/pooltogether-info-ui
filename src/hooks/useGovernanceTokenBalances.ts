@@ -5,6 +5,7 @@ import { addBigNumbers, toNonScaledUsdString } from '@pooltogether/utilities'
 import { CHAIN_ID } from '@pooltogether/wallet-connection'
 import { BigNumber } from 'ethers'
 import { combineTokenBalanceAndPriceData } from '../utils/combineTokenBalanceAndPriceData'
+import { useDelegationBalances } from './useDelegationBalances'
 import { useAllTokenBalances } from './useTokenBalances'
 import { useTokenLists } from './useTokenLists'
 import { useTokenPrices } from './useTokenPrices'
@@ -24,6 +25,7 @@ const GOVERNANCE_ADDRESSES: { [chainId: number]: string }[] = [
   },
   // Exec Team
   {
+    [CHAIN_ID.mainnet]: '0xda63d70332139e6a8eca7513f4b6e2e0dc93b693',
     [CHAIN_ID.polygon]: '0x3fee50d2888f2f7106fcdc0120295eba3ae59245',
     [CHAIN_ID.optimism]: '0x8d352083f7094dc51cd7da8c5c0985ad6e149629'
   }
@@ -151,13 +153,17 @@ export const useGovernanceTokenBalancesTotal = () => {
     useVestingPoolBalance()
   const { data: aaveRewardsBalances, isFetched: isAaveRewardsBalancesFetched } =
     useAaveRewardsBalances()
+  const { data: delegationBalances, isFetched: isDelegationBalancesFetched } =
+    useDelegationBalances()
 
   const isFetched =
     isGovernanceTokenBalancesFetched &&
     isVestingPoolBalanceFetched &&
     vestingPoolBalance?.totalValueUsdScaled &&
     governanceTokenBalancesFlattened &&
-    isAaveRewardsBalancesFetched
+    isAaveRewardsBalancesFetched &&
+    isDelegationBalancesFetched &&
+    delegationBalances.totalValueUsdScaled
 
   if (!isFetched) {
     return {
@@ -174,7 +180,8 @@ export const useGovernanceTokenBalancesTotal = () => {
       .map((balance) => balance.totalValueUsdScaled)
       .filter(Boolean),
     vestingPoolBalance.totalValueUsdScaled,
-    aaveRewardsTotalValueUsdScaled(aaveRewardsBalances)
+    aaveRewardsTotalValueUsdScaled(aaveRewardsBalances),
+    delegationBalances.totalValueUsdScaled
   ])
 
   const totalValueUsd = toNonScaledUsdString(totalValueUsdScaled)

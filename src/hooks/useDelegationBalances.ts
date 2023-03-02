@@ -14,15 +14,32 @@ const useDelegatorsStake = (chainId: number, delegator: string) => {
   return useTokenBalance(chainId, delegator, twabDelegatorAddress)
 }
 
-interface delegationReturn {
+interface DelegationData extends DelegationReturn {
+  usd: number
+  usdValueUnformatted: BigNumber
+  totalValueUsd: string
+  totalValueUsdScaled: BigNumber
+  address: string
+  chainId: number
+  isVesting: boolean
+  isDelegating: boolean
+  name: string
+  symbol: string
+}
+
+interface DelegationReturn {
   amount?: string
   amountPretty?: string
   amountUnformatted?: BigNumber
+  totalValueUsdScaled: BigNumber
 }
 
-export const useDelegationBalances = () => {
-  let data = {}
-
+export const useDelegationBalances = (): {
+  data: DelegationData | undefined
+  isFetched: boolean
+  address: string
+  chainId: number
+} => {
   const { data: delegationStakeOptimism, isFetched: isDelegationStakeOptimismFetched } =
     useDelegatorsStake(CHAIN_ID.optimism, '0x8d352083f7094dc51cd7da8c5c0985ad6e149629')
   const { data: delegationStakePolygon, isFetched: isDelegationStakePolygonFetched } =
@@ -57,13 +74,14 @@ export const useDelegationBalances = () => {
     const usdValueUnformatted = amountMultByUsd(balancePlusStakedamountUnformatted, 1)
     const totalValueUsd = formatUnits(balancePlusStakedamountUnformatted, 6)
     const totalValueUsdScaled = toScaledUsdBigNumber(totalValueUsd)
-
-    const delegationBalancesTotal: delegationReturn = {
+    const delegationBalancesTotal: DelegationReturn = {
       amount: amount.toString(),
       amountPretty: numberWithCommas(amount),
-      amountUnformatted: balancePlusStakedamountUnformatted
+      amountUnformatted: balancePlusStakedamountUnformatted,
+      totalValueUsdScaled: totalValueUsdScaled
     }
-    data = {
+
+    const data: DelegationData = {
       ...delegationBalancesTotal,
       usd,
       usdValueUnformatted,
@@ -76,11 +94,13 @@ export const useDelegationBalances = () => {
       name: 'Delegation',
       symbol: 'USDC'
     }
+
+    return { data, isFetched, address: data.address, chainId: data.chainId }
   }
 
   return {
+    data: undefined,
     isFetched,
-    data,
     address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
     chainId: CHAIN_ID.optimism
   }
