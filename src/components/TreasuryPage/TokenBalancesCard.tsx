@@ -91,6 +91,33 @@ const TokensList = () => {
   const data = useMemo(() => {
     let data = []
 
+    if (isFetched) {
+      tokenBalances.forEach((tokenBalance) => {
+        if (!tokenBalance.amountUnformatted?.isZero()) {
+          const foundIndex = data.findIndex(
+            (entry) =>
+              entry.address.toLowerCase() === tokenBalance.address.toLowerCase() &&
+              entry.chainId === tokenBalance.chainId
+          )
+          if (foundIndex >= 0) {
+            data[foundIndex].amount = (
+              Number(data[foundIndex].amount) + Number(tokenBalance.amount)
+            ).toString()
+            if (
+              data[foundIndex].totalValueUsd !== undefined &&
+              tokenBalance.totalValueUsd !== undefined
+            ) {
+              data[foundIndex].totalValueUsd = (
+                Number(data[foundIndex].totalValueUsd) + Number(tokenBalance.totalValueUsd)
+              ).toString()
+            }
+          } else {
+            data.push(tokenBalance)
+          }
+        }
+      })
+    }
+
     if (isVestingPoolBalanceFetched) {
       data.push(vestingPoolBalance)
     }
@@ -99,12 +126,7 @@ const TokensList = () => {
       data.push(delegationBalances)
     }
 
-    if (isFetched) {
-      data.push(...tokenBalances)
-    }
-
-    data = data.filter((balance) => !balance.amountUnformatted?.isZero())
-    // don't show dusty tokens except ARENA
+    // don't show dusty tokens
     data = data.filter(
       (balance) => balance.totalValueUsd === undefined || balance.totalValueUsd > 5
     )
