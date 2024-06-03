@@ -1,6 +1,8 @@
 import { LoadingRows } from '@components/LoadingRows'
 import { CONTRACT_ADDRESSES } from '@constants/legacy'
+import { formatEther } from '@ethersproject/units'
 import { useDelegationBalances } from '@hooks/useDelegationBalances'
+import { useEthBalance } from '@hooks/useEthBalance'
 import {
   useGovernanceTokenBalancesTotal,
   useGovernanceTokenBalancesFlattened
@@ -15,7 +17,7 @@ import {
   ScreenSize
 } from '@pooltogether/react-components'
 import { formatCurrencyNumberForDisplay, formatNumberForDisplay } from '@pooltogether/utilities'
-import { BlockExplorerLink } from '@pooltogether/wallet-connection'
+import { BlockExplorerLink, CHAIN_ID } from '@pooltogether/wallet-connection'
 import FeatherIcon from 'feather-icons-react'
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
@@ -27,10 +29,11 @@ export const TokenBalancesCard = (props) => {
 
   return (
     <Card className={className}>
-      <h6 className='font-averta text-accent-2 text-xs uppercase mt-2 mb-4'>Token Holdings</h6>
+      <h6 className='font-averta text-accent-2 text-xs uppercase mt-2 mb-4'>Total Holdings</h6>
       <h4 className='mb-4 sm:mb-8'>
         {isFetched && <span>{formatCurrencyNumberForDisplay(data.totalValueUsd)}</span>}
       </h4>
+      <EtherBalance />
       <TokensList />
 
       <h6 className='font-averta   uppercase mt-2'>
@@ -43,6 +46,58 @@ export const TokenBalancesCard = (props) => {
         </BlockExplorerLink>
       </h6>
     </Card>
+  )
+}
+
+const EtherBalance = () => {
+  const chainId = CHAIN_ID.mainnet
+
+  const { data: ethBalance, isFetched } = useEthBalance(
+    chainId,
+    CONTRACT_ADDRESSES[chainId].GovernanceTimelock
+  )
+
+  if (!isFetched) {
+    return (
+      <div>
+        <LoadingRows className='my-6 h-6' />
+      </div>
+    )
+  }
+  const ethPrice = 3850
+
+  const valueUsd = Number(formatEther(ethBalance)) * ethPrice
+
+  return (
+    <div>
+      <h6 className='font-averta text-accent-2 text-xs uppercase mt-2 mb-2'>ETH Balance</h6>
+      <table role='table' className='table table-fixed w-full align-top mb-8'>
+        <tbody className='w-full' role='rowgroup'>
+          <tr role='row' className='tr'>
+            <td className='td ' role='cell'>
+              <span className='flex my-2'>
+                <TokenIcon
+                  chainId={1}
+                  address={'0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'}
+                  className='mr-2 sm:mr-4 my-auto'
+                />{' '}
+                <span className='font-bold'>ETH</span>
+              </span>
+            </td>
+            <td className='td invisible xs:visible' role='cell'>
+              <span className='flex my-2'>
+                <span>{formatEther(ethBalance)}</span> <span className='ml-1 opacity-60'>ETH</span>
+              </span>
+            </td>
+            <td className='td flex justify-end' role='cell'>
+              <span className='flex my-2'>
+                <span>{isNaN(valueUsd) ? '-' : formatCurrencyNumberForDisplay(valueUsd)}</span>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   )
 }
 
@@ -155,7 +210,12 @@ const TokensList = () => {
     )
   }
 
-  return <BasicTable tableInstance={tableInstance} noHeader />
+  return (
+    <div>
+      <h6 className='font-averta text-accent-2 text-xs uppercase mt-2 mb-2'>ERC20 Balances</h6>
+      <BasicTable tableInstance={tableInstance} noHeader />
+    </div>
+  )
 }
 
 const Symbol = (props: {

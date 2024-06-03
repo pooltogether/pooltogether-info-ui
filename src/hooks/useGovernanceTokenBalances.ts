@@ -6,6 +6,7 @@ import { CHAIN_ID } from '@pooltogether/wallet-connection'
 import { BigNumber } from 'ethers'
 import { combineTokenBalanceAndPriceData } from '../utils/combineTokenBalanceAndPriceData'
 import { useDelegationBalances } from './useDelegationBalances'
+import { useEthBalanceWithUsd } from './useEthBalance'
 import { useAllTokenBalances } from './useTokenBalances'
 import { useTokenLists } from './useTokenLists'
 import { useTokenPrices } from './useTokenPrices'
@@ -147,6 +148,8 @@ export const useGovernanceTokenBalancesFlattened = () => {
  * @returns
  */
 export const useGovernanceTokenBalancesTotal = () => {
+  const chainId = CHAIN_ID.mainnet
+
   const { data: governanceTokenBalancesFlattened, isFetched: isGovernanceTokenBalancesFetched } =
     useGovernanceTokenBalancesFlattened()
   const { data: vestingPoolBalance, isFetched: isVestingPoolBalanceFetched } =
@@ -155,6 +158,10 @@ export const useGovernanceTokenBalancesTotal = () => {
     useAaveRewardsBalances()
   const { data: delegationBalances, isFetched: isDelegationBalancesFetched } =
     useDelegationBalances()
+  const { data: ethBalance, isFetched: isEtherBalanceFetched } = useEthBalanceWithUsd(
+    chainId,
+    CONTRACT_ADDRESSES[chainId].GovernanceTimelock
+  )
 
   const isFetched =
     isGovernanceTokenBalancesFetched &&
@@ -163,6 +170,7 @@ export const useGovernanceTokenBalancesTotal = () => {
     governanceTokenBalancesFlattened &&
     isAaveRewardsBalancesFetched &&
     isDelegationBalancesFetched &&
+    isEtherBalanceFetched &&
     delegationBalances.totalValueUsdScaled
 
   if (!isFetched) {
@@ -181,7 +189,8 @@ export const useGovernanceTokenBalancesTotal = () => {
       .filter(Boolean),
     vestingPoolBalance.totalValueUsdScaled,
     aaveRewardsTotalValueUsdScaled(aaveRewardsBalances),
-    delegationBalances.totalValueUsdScaled
+    delegationBalances.totalValueUsdScaled,
+    ethBalance.totalValueUsdScaled
   ])
 
   const totalValueUsd = toNonScaledUsdString(totalValueUsdScaled)
@@ -211,19 +220,4 @@ const aaveRewardsTotalValueUsdScaled = (aaveRewardsBalances) => {
   })
 
   return totalValue
-}
-
-const timelockAddressesListsForChains = (chainIds) => {
-  let timelockAddresses = {}
-
-  chainIds.forEach((chainId) => {
-    const governanceTimelockAddress = CONTRACT_ADDRESSES[chainId].GovernanceTimelock
-    if (governanceTimelockAddress) {
-      timelockAddresses[chainId] = governanceTimelockAddress
-    } else {
-      timelockAddresses[chainId] = null
-    }
-  })
-
-  return timelockAddresses
 }
