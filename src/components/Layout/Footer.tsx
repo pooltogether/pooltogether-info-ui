@@ -13,9 +13,6 @@ export const Footer = () => {
       <ExternalLink theme={LinkTheme.default} href={'https://pooltogether.com/discord'} noIcon>
         Discord
       </ExternalLink>
-      <Link href={'/faucets'}>
-        <a className='text-pt-white  transition hover:text-pt-teal'>Token Faucets</a>
-      </Link>
     </div>
   )
 }

@@ -41,7 +41,8 @@ export const CONTRACT_ADDRESSES = {
     GovernanceToken: '0x0cec1a9154ff802e7934fc916ed7ca50bde6844e',
     TreasuryVester: '0x21950e281bde1714ffd1062ed17c56d4d8de2359',
     Stablecoin: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-    BondTreasury: '0x7437e08982a39fca561c1ca1da1d23ff26fe2b93'
+    BondTreasury: '0x7437e08982a39fca561c1ca1da1d23ff26fe2b93',
+    WETH: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
   },
   4: {
     GovernanceTimelock: '0x8df0afb54836dc8d0ae795503f837cff197d3df1',
@@ -55,6 +56,7 @@ export const CONTRACT_ADDRESSES = {
 }
 
 export const QUERY_KEYS = {
+  ethBalance: 'ethBalance',
   getTokenFaucets: 'getTokenFaucets',
   getPrizePoolReserves: 'getPrizePoolReserves',
   getTokenBalances: 'getTokenBalances',

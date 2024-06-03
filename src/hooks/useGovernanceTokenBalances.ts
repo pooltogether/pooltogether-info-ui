@@ -1,3 +1,4 @@
+import { formatEther } from '@ethersproject/units'
 import { CONTRACT_ADDRESSES } from '@constants/legacy'
 import { useAaveRewardsBalances } from '@hooks/useAaveRewardsBalances'
 import { useVestingPoolBalance } from '@hooks/useVestingPoolBalance'
@@ -9,6 +10,7 @@ import { useDelegationBalances } from './useDelegationBalances'
 import { useAllTokenBalances } from './useTokenBalances'
 import { useTokenLists } from './useTokenLists'
 import { useTokenPrices } from './useTokenPrices'
+import { useEthBalanceWithUsd } from './useEthBalance'
 
 // The Governance owned addresses to query balances for
 const GOVERNANCE_ADDRESSES: { [chainId: number]: string }[] = [
@@ -147,6 +149,8 @@ export const useGovernanceTokenBalancesFlattened = () => {
  * @returns
  */
 export const useGovernanceTokenBalancesTotal = () => {
+  const chainId = CHAIN_ID.mainnet
+
   const { data: governanceTokenBalancesFlattened, isFetched: isGovernanceTokenBalancesFetched } =
     useGovernanceTokenBalancesFlattened()
   const { data: vestingPoolBalance, isFetched: isVestingPoolBalanceFetched } =
@@ -155,6 +159,10 @@ export const useGovernanceTokenBalancesTotal = () => {
     useAaveRewardsBalances()
   const { data: delegationBalances, isFetched: isDelegationBalancesFetched } =
     useDelegationBalances()
+  const { data: ethBalance, isFetched: isEtherBalanceFetched } = useEthBalanceWithUsd(
+    chainId,
+    CONTRACT_ADDRESSES[chainId].GovernanceTimelock
+  )
 
   const isFetched =
     isGovernanceTokenBalancesFetched &&
@@ -163,6 +171,7 @@ export const useGovernanceTokenBalancesTotal = () => {
     governanceTokenBalancesFlattened &&
     isAaveRewardsBalancesFetched &&
     isDelegationBalancesFetched &&
+    isEtherBalanceFetched &&
     delegationBalances.totalValueUsdScaled
 
   if (!isFetched) {
@@ -181,7 +190,8 @@ export const useGovernanceTokenBalancesTotal = () => {
       .filter(Boolean),
     vestingPoolBalance.totalValueUsdScaled,
     aaveRewardsTotalValueUsdScaled(aaveRewardsBalances),
-    delegationBalances.totalValueUsdScaled
+    delegationBalances.totalValueUsdScaled,
+    ethBalance.totalValueUsdScaled
   ])
 
   const totalValueUsd = toNonScaledUsdString(totalValueUsdScaled)
@@ -211,19 +221,4 @@ const aaveRewardsTotalValueUsdScaled = (aaveRewardsBalances) => {
   })
 
   return totalValue
-}
-
-const timelockAddressesListsForChains = (chainIds) => {
-  let timelockAddresses = {}
-
-  chainIds.forEach((chainId) => {
-    const governanceTimelockAddress = CONTRACT_ADDRESSES[chainId].GovernanceTimelock
-    if (governanceTimelockAddress) {
-      timelockAddresses[chainId] = governanceTimelockAddress
-    } else {
-      timelockAddresses[chainId] = null
-    }
-  })
-
-  return timelockAddresses
 }
