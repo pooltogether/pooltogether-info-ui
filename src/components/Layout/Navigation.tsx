@@ -3,17 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 
-const navLinks = [
-  {
-    i18nKey: 'App',
-    href: 'https://app.pooltogether.com/'
-  },
-  {
-    i18nKey: 'Treasury',
-    href: '/',
-    regex: /^(\/treasury|\/$)/
-  }
-]
+const navLinks = []
 
 export const Navigation: React.FC<{ className?: string }> = (props) => {
   const { className } = props
