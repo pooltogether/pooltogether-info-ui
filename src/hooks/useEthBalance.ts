@@ -1,10 +1,11 @@
-import { formatEther } from '@ethersproject/units'
-import { useQuery } from 'react-query'
 import { CONTRACT_ADDRESSES, QUERY_KEYS } from '@constants/legacy'
+import { formatEther } from '@ethersproject/units'
 import { useGovernanceChainId } from '@hooks/useGovernanceChainId'
 import { useTokenPrices } from '@hooks/useTokenPrices'
-import { getReadProviders } from '@pooltogether/wallet-connection'
 import { amountMultByUsd, toScaledUsdBigNumber } from '@pooltogether/utilities'
+import { getReadProviders } from '@pooltogether/wallet-connection'
+import { BigNumber } from 'ethers'
+import { useQuery } from 'react-query'
 import { RPC_URLS } from '../constants/rpc'
 import { useTokenLists } from './useTokenLists'
 
@@ -34,7 +35,16 @@ export const useEthBalanceWithUsd = (chainId, address) => {
     ...remainder
   } = useEthBalance(chainId, address)
 
-  let data = {}
+  let data: {
+    balance: BigNumber
+    usd?: number
+    usdValueUnformatted?: BigNumber
+    totalValueUsd?: string
+    totalValueUsdScaled?: BigNumber
+    address?: string
+    chainId?: number
+    isVesting?: boolean
+  }
 
   const governanceChainId = useGovernanceChainId()
   const wethTokenAddress: string = CONTRACT_ADDRESSES[governanceChainId].WETH

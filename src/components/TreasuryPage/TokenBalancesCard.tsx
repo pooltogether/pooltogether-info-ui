@@ -1,8 +1,8 @@
-import { formatEther } from '@ethersproject/units'
 import { LoadingRows } from '@components/LoadingRows'
 import { CONTRACT_ADDRESSES } from '@constants/legacy'
-import { useEthBalance } from '@hooks/useEthBalance'
+import { formatEther } from '@ethersproject/units'
 import { useDelegationBalances } from '@hooks/useDelegationBalances'
+import { useEthBalance } from '@hooks/useEthBalance'
 import {
   useGovernanceTokenBalancesTotal,
   useGovernanceTokenBalancesFlattened

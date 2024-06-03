@@ -1,4 +1,3 @@
-import { formatEther } from '@ethersproject/units'
 import { CONTRACT_ADDRESSES } from '@constants/legacy'
 import { useAaveRewardsBalances } from '@hooks/useAaveRewardsBalances'
 import { useVestingPoolBalance } from '@hooks/useVestingPoolBalance'
@@ -7,10 +6,10 @@ import { CHAIN_ID } from '@pooltogether/wallet-connection'
 import { BigNumber } from 'ethers'
 import { combineTokenBalanceAndPriceData } from '../utils/combineTokenBalanceAndPriceData'
 import { useDelegationBalances } from './useDelegationBalances'
+import { useEthBalanceWithUsd } from './useEthBalance'
 import { useAllTokenBalances } from './useTokenBalances'
 import { useTokenLists } from './useTokenLists'
 import { useTokenPrices } from './useTokenPrices'
-import { useEthBalanceWithUsd } from './useEthBalance'
 
 // The Governance owned addresses to query balances for
 const GOVERNANCE_ADDRESSES: { [chainId: number]: string }[] = [
